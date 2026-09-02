@@ -1,0 +1,356 @@
+import React, { useState, useEffect } from 'react';
+import { UserMember, TicketPurchase, Artwork, DonationRecord } from '../types';
+import { StorageService } from '../services/storage';
+import { downloadICSFile, generateGoogleCalendarUrl } from '../services/calendarSync';
+import { audioSynth } from '../services/audioSynthesizer';
+import { 
+  User, 
+  Calendar, 
+  Ticket, 
+  Flame, 
+  Bookmark, 
+  CalendarPlus, 
+  Download, 
+  Check, 
+  QrCode, 
+  ShieldCheck, 
+  Sparkles, 
+  LogOut, 
+  Clock, 
+  MapPin,
+  ExternalLink,
+  Award,
+  Layers,
+  ArrowRight
+} from 'lucide-react';
+import { motion } from 'motion/react';
+
+interface MemberDashboardProps {
+  onExploreEvents: () => void;
+  onExploreGallery: () => void;
+  onMakeDonation: () => void;
+}
+
+export const MemberDashboard: React.FC<MemberDashboardProps> = ({
+  onExploreEvents,
+  onExploreGallery,
+  onMakeDonation
+}) => {
+  const [currentUser, setCurrentUser] = useState<UserMember | null>(null);
+  const [allArtworks, setAllArtworks] = useState<Artwork[]>([]);
+  const [activeSubTab, setActiveSubTab] = useState<'passes' | 'vault' | 'donations' | 'fellowships'>('passes');
+  const [copiedPassId, setCopiedPassId] = useState<string | null>(null);
+
+  useEffect(() => {
+    setCurrentUser(StorageService.getCurrentUser());
+    setAllArtworks(StorageService.getGallery());
+
+    const handleAuthChange = (e: any) => {
+      setCurrentUser(e.detail);
+    };
+    window.addEventListener('kshestra_auth_changed', handleAuthChange);
+    return () => window.removeEventListener('kshestra_auth_changed', handleAuthChange);
+  }, []);
+
+  if (!currentUser) {
+    return (
+      <div className="py-24 text-center max-w-xl mx-auto px-4">
+        <h3 className="font-serif-display text-3xl font-bold text-[#8E3524] mb-3">
+          Sanctum Portal Restricted
+        </h3>
+        <p className="font-sans text-sm text-[#5E5752] mb-6">
+          Please sign in to access your registered event passes, calendar sync, and patron records.
+        </p>
+      </div>
+    );
+  }
+
+  const bookmarkedArtworks = allArtworks.filter(a => 
+    (currentUser.bookmarkedArtworkIds || []).includes(a.id)
+  );
+
+  const handleDownloadICS = (ticket: TicketPurchase) => {
+    audioSynth.playChime();
+    const events = StorageService.getEvents();
+    const event = events.find(e => e.id === ticket.eventId) || {
+      id: ticket.eventId,
+      title: ticket.eventTitle,
+      bengaliTitle: '',
+      date: ticket.eventDate,
+      isoDate: '2026-10-10',
+      time: ticket.eventTime,
+      venue: ticket.eventVenue,
+      city: 'Kolkata',
+      price: ticket.totalAmount,
+      category: 'Live Gathering' as const,
+      capacity: 100,
+      availableTickets: 50,
+      description: `Official Kshestra Confluence: ${ticket.eventTitle}`,
+      curatorNotes: '',
+      featuredArtists: [],
+      coverImage: '',
+      tags: []
+    };
+
+    downloadICSFile(event, ticket);
+    setCopiedPassId(ticket.id);
+    setTimeout(() => setCopiedPassId(null), 2500);
+  };
+
+  const handleGoogleCalendar = (ticket: TicketPurchase) => {
+    audioSynth.playChime();
+    const events = StorageService.getEvents();
+    const event = events.find(e => e.id === ticket.eventId) || {
+      id: ticket.eventId,
+      title: ticket.eventTitle,
+      bengaliTitle: '',
+      date: ticket.eventDate,
+      isoDate: '2026-10-10',
+      time: ticket.eventTime,
+      venue: ticket.eventVenue,
+      city: 'Kolkata',
+      price: ticket.totalAmount,
+      category: 'Live Gathering' as const,
+      capacity: 100,
+      availableTickets: 50,
+      description: `Official Kshestra Confluence: ${ticket.eventTitle}`,
+      curatorNotes: '',
+      featuredArtists: [],
+      coverImage: '',
+      tags: []
+    };
+
+    const url = generateGoogleCalendarUrl(event, ticket);
+    window.open(url, '_blank');
+  };
+
+  const handleLogout = () => {
+    audioSynth.playChime();
+    StorageService.logout();
+    setCurrentUser(null);
+  };
+
+  return (
+    <div className="py-12 md:py-16 px-4 sm:px-8 max-w-6xl mx-auto space-y-10">
+      
+      {/* 1. Header Profile Banner */}
+      <div className="sanctum-card rounded-sm p-6 sm:p-8 bg-[#FFFFFF] border border-[#211E1C]/20 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-sm">
+        <div className="flex items-center gap-4">
+          <div className="w-14 h-14 rounded-sm bg-[#8E3524] text-[#FAF7F2] flex items-center justify-center font-serif text-2xl font-bold shadow-xs">
+            {currentUser.name.charAt(0)}
+          </div>
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <h2 className="font-serif-display text-2xl sm:text-3xl font-bold text-[#211E1C]">
+                {currentUser.name}
+              </h2>
+              <span className="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider rounded-sm bg-[#4A583A]/10 text-[#4A583A] font-semibold border border-[#4A583A]/30">
+                Verified Resident
+              </span>
+            </div>
+            <p className="text-xs text-[#5E5752] font-mono">
+              {currentUser.email} · Resident Since {currentUser.memberSince} · {currentUser.city}
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3 w-full md:w-auto">
+          <button
+            onClick={onMakeDonation}
+            data-cursor="pointer"
+            className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold uppercase rounded-sm bg-[#8E3524] hover:bg-[#662215] text-[#FAF7F2] border border-[#211E1C]/20 transition-all shadow-xs"
+          >
+            <Flame className="w-3.5 h-3.5 text-[#C0822B]" />
+            <span>Support the Flame</span>
+          </button>
+          <button
+            onClick={handleLogout}
+            data-cursor="pointer"
+            className="p-2.5 text-[#5E5752] hover:text-[#8E3524] hover:bg-[#FAF7F2] rounded-sm border border-[#211E1C]/15 transition-colors"
+            title="Log Out"
+          >
+            <LogOut className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+
+      {/* 2. Navigation Tabs */}
+      <div className="flex border-b border-[#211E1C]/15 text-xs sm:text-sm font-semibold overflow-x-auto">
+        <button
+          onClick={() => setActiveSubTab('passes')}
+          data-cursor="pointer"
+          className={`py-3 px-5 border-b-2 flex items-center gap-2 transition-all whitespace-nowrap ${
+            activeSubTab === 'passes'
+              ? 'border-[#8E3524] text-[#8E3524]'
+              : 'border-transparent text-[#5E5752] hover:text-[#211E1C]'
+          }`}
+        >
+          <Ticket className="w-4 h-4" />
+          <span>Reserved Gathering Passes ({currentUser.ticketPurchases?.length || 0})</span>
+        </button>
+
+        <button
+          onClick={() => setActiveSubTab('donations')}
+          data-cursor="pointer"
+          className={`py-3 px-5 border-b-2 flex items-center gap-2 transition-all whitespace-nowrap ${
+            activeSubTab === 'donations'
+              ? 'border-[#8E3524] text-[#8E3524]'
+              : 'border-transparent text-[#5E5752] hover:text-[#211E1C]'
+          }`}
+        >
+          <Flame className="w-4 h-4" />
+          <span>Patronage & 80G Receipts ({currentUser.donations?.length || 0})</span>
+        </button>
+      </div>
+
+      {/* 3. Passes Tab */}
+      {activeSubTab === 'passes' && (
+        <div className="space-y-6">
+          {(!currentUser.ticketPurchases || currentUser.ticketPurchases.length === 0) ? (
+            <div className="text-center py-16 bg-[#FFFFFF] rounded-sm border border-[#211E1C]/15 p-8 space-y-4">
+              <Ticket className="w-10 h-10 text-[#5E5752] mx-auto opacity-50" />
+              <h4 className="font-serif-display text-xl font-bold text-[#211E1C]">
+                No Passes Reserved Yet
+              </h4>
+              <p className="text-xs text-[#5E5752] max-w-md mx-auto">
+                Reserve your seat at our intimate performances, collaborative mixers, and production labs.
+              </p>
+              <button
+                onClick={onExploreEvents}
+                data-cursor="pointer"
+                className="inline-flex items-center gap-2 px-6 py-2.5 text-xs font-bold uppercase rounded-sm bg-[#8E3524] text-[#FAF7F2]"
+              >
+                <span>Browse Gatherings</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {currentUser.ticketPurchases.map((ticket) => (
+                <div
+                  key={ticket.id}
+                  className="sanctum-card rounded-sm bg-[#FFFFFF] border border-[#211E1C]/15 p-6 space-y-4 shadow-xs flex flex-col justify-between"
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-start justify-between border-b border-[#211E1C]/10 pb-3">
+                      <div>
+                        <span className="text-[10px] font-mono uppercase text-[#8E3524] font-bold">
+                          Digital Entry Pass
+                        </span>
+                        <h4 className="font-serif-display text-lg font-bold text-[#211E1C]">
+                          {ticket.eventTitle}
+                        </h4>
+                      </div>
+                      <div className="font-mono text-xs font-bold text-[#8E3524] bg-[#F3EDE2] px-2.5 py-1 rounded-sm">
+                        {ticket.ticketCode}
+                      </div>
+                    </div>
+
+                    <div className="space-y-1.5 text-xs font-mono text-[#5E5752]">
+                      <div className="flex items-center gap-2 text-[#211E1C]">
+                        <Clock className="w-3.5 h-3.5 text-[#8E3524]" />
+                        <span>{ticket.eventDate}</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <MapPin className="w-3.5 h-3.5 text-[#4A583A] shrink-0 mt-0.5" />
+                        <span>{ticket.eventVenue}</span>
+                      </div>
+                    </div>
+
+                    <div className="p-3 bg-[#FAF7F2] rounded-sm border border-[#211E1C]/10 flex items-center justify-between text-xs">
+                      <div>
+                        <span className="text-[#5E5752] block text-[10px]">Registered Name</span>
+                        <span className="font-semibold text-[#211E1C]">{ticket.buyerName} ({ticket.ticketCount} Seat)</span>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-[#5E5752] block text-[10px]">Pass Status</span>
+                        <span className="font-bold text-[#4A583A] uppercase">Confirmed</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Pass Actions: Calendar & ICS */}
+                  <div className="pt-3 border-t border-[#211E1C]/10 flex gap-2">
+                    <button
+                      onClick={() => handleGoogleCalendar(ticket)}
+                      data-cursor="pointer"
+                      className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 text-[11px] font-semibold rounded-sm bg-[#F3EDE2] text-[#211E1C] hover:bg-[#EBE2D4] transition-colors"
+                    >
+                      <CalendarPlus className="w-3.5 h-3.5 text-[#8E3524]" />
+                      <span>Google Cal</span>
+                    </button>
+                    <button
+                      onClick={() => handleDownloadICS(ticket)}
+                      data-cursor="pointer"
+                      className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 text-[11px] font-semibold rounded-sm bg-[#FAF7F2] text-[#211E1C] hover:bg-[#F3EDE2] border border-[#211E1C]/15 transition-colors"
+                    >
+                      <Download className="w-3.5 h-3.5 text-[#4A583A]" />
+                      <span>{copiedPassId === ticket.id ? 'Exported!' : 'Apple / Outlook .ICS'}</span>
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* 4. Donations Tab */}
+      {activeSubTab === 'donations' && (
+        <div className="space-y-6">
+          {(!currentUser.donations || currentUser.donations.length === 0) ? (
+            <div className="text-center py-16 bg-[#FFFFFF] rounded-sm border border-[#211E1C]/15 p-8 space-y-4">
+              <Flame className="w-10 h-10 text-[#8E3524] mx-auto opacity-50" />
+              <h4 className="font-serif-display text-xl font-bold text-[#211E1C]">
+                No Patronage Grants Recorded
+              </h4>
+              <p className="text-xs text-[#5E5752] max-w-md mx-auto">
+                Help build physical sanctuaries and fund emerging artist stipends across India.
+              </p>
+              <button
+                onClick={onMakeDonation}
+                data-cursor="pointer"
+                className="inline-flex items-center gap-2 px-6 py-2.5 text-xs font-bold uppercase rounded-sm bg-[#8E3524] text-[#FAF7F2]"
+              >
+                <span>Support the Foundation</span>
+              </button>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {currentUser.donations.map((don) => (
+                <div
+                  key={don.id}
+                  className="sanctum-card rounded-sm bg-[#FFFFFF] border border-[#211E1C]/15 p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xs"
+                >
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="font-serif-display text-lg font-bold text-[#211E1C]">
+                        {don.tierName}
+                      </span>
+                      <span className="px-2 py-0.5 text-[10px] font-mono uppercase bg-[#4A583A]/10 text-[#4A583A] rounded-sm">
+                        80G Exemption Valid
+                      </span>
+                    </div>
+                    <p className="text-xs text-[#5E5752] font-mono">
+                      Donation ID: {don.paymentId} · Date: {don.date} · Donor: {don.donorName}
+                    </p>
+                  </div>
+
+                  <div className="text-right flex sm:flex-col items-center sm:items-end justify-between">
+                    <div className="font-serif text-2xl font-bold text-[#8E3524]">
+                      ₹{don.amount.toLocaleString('en-IN')}
+                    </div>
+                    <span className="text-[10px] text-[#4A583A] font-mono uppercase font-bold">
+                      Completed & Tax Credited
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+    </div>
+  );
+};

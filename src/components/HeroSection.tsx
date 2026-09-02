@@ -143,15 +143,22 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           <div className="lg:col-span-4 space-y-4">
             <div className="relative rounded-xs border-2 border-[#211E1C] bg-[#211E1C] shadow-lg overflow-hidden">
               <img
-                src="/assets/Images/kshestra_puja.png"
-                alt="Kshestra Foundation"
+                src="/assets/Images/Kshestra_puja.png"
+                alt="Kshestra Puja Ceremony"
                 onError={(e) => {
                   const target = e.currentTarget;
-                  if (!target.dataset.triedJpg) {
+                  if (!target.dataset.triedLower) {
+                    target.dataset.triedLower = 'true';
+                    target.src = '/assets/Images/kshestra_puja.png';
+                  } else if (!target.dataset.triedJpg) {
                     target.dataset.triedJpg = 'true';
+                    target.src = '/assets/Images/Kshestra_puja.jpg';
+                  } else if (!target.dataset.triedLowerJpg) {
+                    target.dataset.triedLowerJpg = 'true';
                     target.src = '/assets/Images/kshestra_puja.jpg';
                   } else {
-                    target.src = 'https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=1000&q=80';
+                    target.src = '/assets/Kshestra Logo PNG.png';
+                    target.className = "w-full h-80 sm:h-96 object-contain p-8 bg-[#211E1C]";
                   }
                 }}
                 className="w-full h-80 sm:h-96 object-cover opacity-90 hover:scale-105 transition-transform duration-700"

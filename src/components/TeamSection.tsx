@@ -5,16 +5,6 @@ import { Shield } from 'lucide-react';
 import { motion } from 'motion/react';
 import { KshestraLogo } from './KshestraLogo';
 
-const FALLBACK_AVATARS: Record<string, string> = {
-  tamohan: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80',
-  oindrila: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80',
-  nayanika: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80',
-  shubhadeep: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80',
-  vira: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80',
-  aryan: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80',
-  sayan: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=800&q=80'
-};
-
 const getMemberImage = (member: TeamMember) => {
   const nameLower = member.name.toLowerCase();
   if (nameLower.includes('tamohan')) return '/assets/Images/tamohan.png';
@@ -25,14 +15,6 @@ const getMemberImage = (member: TeamMember) => {
   if (nameLower.includes('aryan')) return '/assets/Images/Aryan.png';
   if (nameLower.includes('sayan')) return '/assets/Images/Sayan.png';
   return member.portrait || '/assets/Kshestra Logo PNG.png';
-};
-
-const getMemberFallback = (member: TeamMember) => {
-  const nameLower = member.name.toLowerCase();
-  for (const [k, v] of Object.entries(FALLBACK_AVATARS)) {
-    if (nameLower.includes(k)) return v;
-  }
-  return 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80';
 };
 
 export const TeamSection: React.FC = () => {
@@ -70,7 +52,6 @@ export const TeamSection: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
           {guardians.map((member, idx) => {
             const imgSrc = getMemberImage(member);
-            const fallbackSrc = getMemberFallback(member);
 
             return (
               <motion.div
@@ -82,22 +63,33 @@ export const TeamSection: React.FC = () => {
                 className="bg-[#FFFFFF] border border-[#211E1C]/15 rounded-xs overflow-hidden flex flex-col justify-between hover:border-[#8E3524]/60 hover:shadow-md transition-all group"
               >
                 <div>
-                  {/* Smaller, Compact Portrait Photo */}
-                  <div className="relative h-44 sm:h-48 w-full bg-[#211E1C] overflow-hidden">
+                  {/* 1:1 Square Portrait Photo */}
+                  <div className="relative aspect-square w-full bg-[#211E1C] overflow-hidden flex items-center justify-center">
                     <img
                       src={imgSrc}
                       alt={member.name}
                       onError={(e) => {
                         const target = e.currentTarget;
-                        if (!target.dataset.triedFallback) {
-                          target.dataset.triedFallback = 'true';
-                          target.src = fallbackSrc;
+                        if (!target.dataset.triedCase) {
+                          target.dataset.triedCase = 'true';
+                          const s = target.src;
+                          if (s.endsWith('Aryan.png')) { target.src = '/assets/Images/aryan.png'; return; }
+                          if (s.endsWith('aryan.png')) { target.src = '/assets/Images/Aryan.png'; return; }
+                          if (s.endsWith('nayanika.png')) { target.src = '/assets/Images/Nayanika.png'; return; }
+                          if (s.endsWith('Nayanika.png')) { target.src = '/assets/Images/nayanika.png'; return; }
+                          if (s.endsWith('tamohan.png')) { target.src = '/assets/Images/Tamohan.png'; return; }
+                          if (s.endsWith('oindrila.png')) { target.src = '/assets/Images/Oindrila.png'; return; }
+                          if (s.endsWith('shubhadeep.png')) { target.src = '/assets/Images/Shubhadeep.png'; return; }
+                          if (s.endsWith('vira.png')) { target.src = '/assets/Images/Vireshwar.png'; return; }
+                          if (s.endsWith('Sayan.png')) { target.src = '/assets/Images/sayan.png'; return; }
                         }
+                        target.src = '/assets/Kshestra Logo PNG.png';
+                        target.className = "w-2/3 h-2/3 object-contain opacity-80";
                       }}
-                      className="w-full h-full object-cover grayscale contrast-105 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                      className="w-full h-full object-cover object-[center_top] grayscale contrast-105 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
                       referrerPolicy="no-referrer"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#211E1C]/70 via-transparent to-transparent opacity-60" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#211E1C]/60 via-transparent to-transparent opacity-50" />
                     
                     {/* Index Badge */}
                     <div className="absolute top-2.5 left-2.5 bg-[#FAF7F2]/95 backdrop-blur-xs px-1.5 py-0.5 rounded-xs border border-[#211E1C]/20 text-[9px] font-mono font-bold text-[#8E3524]">

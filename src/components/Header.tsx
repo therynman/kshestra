@@ -115,7 +115,11 @@ export const Header: React.FC<HeaderProps> = ({
     } else {
       const el = document.getElementById(sectionId);
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
+        if ((window as any).lenis) {
+          (window as any).lenis.scrollTo(el, { offset: -60, duration: 1.2 });
+        } else {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
       }
     }
   };

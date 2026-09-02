@@ -26,6 +26,7 @@ import { StorageService } from './services/storage';
 import { audioSynth } from './services/audioSynthesizer';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft } from 'lucide-react';
+import Lenis from 'lenis';
 
 export default function App() {
   const [currentView, setCurrentView] = useState<'main' | 'member-dashboard' | 'admin'>('main');
@@ -50,6 +51,23 @@ export default function App() {
     StorageService.init();
     setCurrentUser(StorageService.getCurrentUser());
 
+    // Initialize buttery-smooth Lenis kinetic momentum scrolling
+    const lenis = new Lenis({
+      duration: 1.15,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      touchMultiplier: 1.5,
+    });
+
+    (window as any).lenis = lenis;
+
+    let rafId: number;
+    function raf(time: number) {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    }
+    rafId = requestAnimationFrame(raf);
+
     const handleAuthChange = (e: any) => {
       setCurrentUser(e.detail);
       if (!e.detail && currentView === 'member-dashboard') {
@@ -58,7 +76,11 @@ export default function App() {
     };
 
     window.addEventListener('kshestra_auth_changed', handleAuthChange);
-    return () => window.removeEventListener('kshestra_auth_changed', handleAuthChange);
+    return () => {
+      window.removeEventListener('kshestra_auth_changed', handleAuthChange);
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+    };
   }, [currentView]);
 
   const handleBookEventTicket = (event: EventItem) => {
@@ -126,11 +148,23 @@ export default function App() {
       setCurrentView('main');
       setTimeout(() => {
         const el = document.getElementById(sectionId);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
+        if (el) {
+          if ((window as any).lenis) {
+            (window as any).lenis.scrollTo(el, { offset: -60, duration: 1.2 });
+          } else {
+            el.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
       }, 100);
     } else {
       const el = document.getElementById(sectionId);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      if (el) {
+        if ((window as any).lenis) {
+          (window as any).lenis.scrollTo(el, { offset: -60, duration: 1.2 });
+        } else {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
     }
   };
 

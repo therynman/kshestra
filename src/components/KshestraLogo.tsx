@@ -13,7 +13,7 @@ export const KshestraLogo: React.FC<KshestraLogoProps> = ({
   size,
   color,
   variant = 'terracotta',
-  preferAssetImage = false
+  preferAssetImage = true
 }) => {
   const [imageError, setImageError] = useState(false);
 

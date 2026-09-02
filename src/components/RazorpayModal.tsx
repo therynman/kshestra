@@ -149,8 +149,12 @@ export const RazorpayModal: React.FC<RazorpayModalProps> = ({
         {/* Header */}
         <div className="bg-[#F3EDE2] text-[#211E1C] p-6 flex items-center justify-between border-b border-[#211E1C]/15">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-sm bg-[#8E3524] flex items-center justify-center p-1.5 shadow-xs">
-              <KshestraLogo variant="white" className="w-full h-full text-[#FAF7F2]" />
+            <div className="w-10 h-10 rounded-xs bg-[#FAF7F2] border border-[#211E1C]/20 flex items-center justify-center p-1 shadow-xs shrink-0">
+              <img 
+                src="/assets/Kshestra Logo PNG.png" 
+                alt="Kshestra Foundation Logo" 
+                className="w-full h-full object-contain" 
+              />
             </div>
             <div>
               <h3 className="font-serif-display text-lg font-bold text-[#211E1C]">
@@ -191,9 +195,14 @@ export const RazorpayModal: React.FC<RazorpayModalProps> = ({
               {/* Visual Archival Ticket Preview */}
               <div className="bg-[#FFFFFF] p-5 rounded-sm border border-[#211E1C]/20 text-left space-y-3 shadow-xs">
                 <div className="flex justify-between items-start border-b border-[#211E1C]/10 pb-2">
-                  <div>
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#8E3524]">Kshestra Sanctuary Entry</span>
-                    <h5 className="font-serif font-bold text-sm text-[#211E1C]">{completedPurchase.eventTitle}</h5>
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 rounded-xs bg-[#FAF7F2] border border-[#211E1C]/15 flex items-center justify-center p-0.5 shrink-0">
+                      <img src="/assets/Kshestra Logo PNG.png" alt="Kshestra Logo" className="w-full h-full object-contain" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-[#8E3524]">Kshestra Sanctuary Entry</span>
+                      <h5 className="font-serif font-bold text-sm text-[#211E1C]">{completedPurchase.eventTitle}</h5>
+                    </div>
                   </div>
                   <div className="text-right font-mono text-xs font-bold text-[#8E3524]">
                     {completedPurchase.ticketCount} Pass(es)

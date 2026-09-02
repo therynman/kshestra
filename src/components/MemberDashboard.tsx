@@ -46,10 +46,10 @@ export const MemberDashboard: React.FC<MemberDashboardProps> = ({
   if (!currentUser) {
     return (
       <div className="py-24 text-center max-w-xl mx-auto px-4">
-        <h3 className="font-gambetta text-3xl font-bold text-[#8E3524] mb-3">
+        <h3 className="font-gambetta text-3xl font-bold text-[#5C1D24] mb-3">
           Sanctum Portal Restricted
         </h3>
-        <p className="font-sans text-sm text-[#5E5752] mb-6">
+        <p className="font-sans text-sm text-[#725C54] mb-6">
           Please sign in to access your registered event passes, calendar sync, and patron records.
         </p>
       </div>
@@ -119,21 +119,21 @@ export const MemberDashboard: React.FC<MemberDashboardProps> = ({
     <div className="py-12 md:py-16 px-4 sm:px-8 max-w-6xl mx-auto space-y-10">
       
       {/* 1. Header Profile Banner */}
-      <div className="rounded-xs p-6 sm:p-8 bg-[#FFFFFF] border border-[#211E1C]/20 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-sm">
+      <div className="rounded-xs p-6 sm:p-8 bg-[#FFFFFF] border border-[#3A2B27]/20 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-sm">
         <div className="flex items-center gap-4">
-          <div className="w-14 h-14 rounded-xs bg-[#8E3524] text-[#FAF7F2] flex items-center justify-center font-serif text-2xl font-bold shadow-xs">
+          <div className="w-14 h-14 rounded-xs bg-[#5C1D24] text-[#FFF5E9] flex items-center justify-center font-serif text-2xl font-bold shadow-xs">
             {currentUser.name.charAt(0)}
           </div>
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <h2 className="font-gambetta text-2xl sm:text-3xl font-bold text-[#211E1C]">
+              <h2 className="font-gambetta text-2xl sm:text-3xl font-bold text-[#3A2B27]">
                 {currentUser.name}
               </h2>
-              <span className="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider rounded-xs bg-[#4A583A]/10 text-[#4A583A] font-semibold border border-[#4A583A]/30">
+              <span className="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider rounded-xs bg-[#8A8E3E]/10 text-[#8A8E3E] font-semibold border border-[#8A8E3E]/30">
                 Verified Resident
               </span>
             </div>
-            <p className="text-xs text-[#5E5752] font-mono">
+            <p className="text-xs text-[#725C54] font-mono">
               {currentUser.email} · Resident Since {currentUser.memberSince} · {currentUser.city}
             </p>
           </div>
@@ -143,15 +143,15 @@ export const MemberDashboard: React.FC<MemberDashboardProps> = ({
           <button
             onClick={onMakeDonation}
             data-cursor="pointer"
-            className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold uppercase rounded-xs bg-[#8E3524] hover:bg-[#662215] text-[#FAF7F2] border border-[#211E1C]/20 transition-all shadow-xs"
+            className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold uppercase rounded-xs bg-[#5C1D24] hover:bg-[#431319] text-[#FFF5E9] border border-[#3A2B27]/20 transition-all shadow-xs"
           >
-            <Flame className="w-3.5 h-3.5 text-[#C0822B]" />
+            <Flame className="w-3.5 h-3.5 text-[#8A8E3E]" />
             <span>Support the Flame (Donate)</span>
           </button>
           <button
             onClick={handleLogout}
             data-cursor="pointer"
-            className="p-2.5 text-[#5E5752] hover:text-[#8E3524] hover:bg-[#FAF7F2] rounded-xs border border-[#211E1C]/15 transition-colors"
+            className="p-2.5 text-[#725C54] hover:text-[#5C1D24] hover:bg-[#FFF5E9] rounded-xs border border-[#3A2B27]/15 transition-colors"
             title="Log Out"
           >
             <LogOut className="w-4 h-4" />
@@ -160,14 +160,14 @@ export const MemberDashboard: React.FC<MemberDashboardProps> = ({
       </div>
 
       {/* 2. Navigation Tabs */}
-      <div className="flex border-b border-[#211E1C]/15 text-xs sm:text-sm font-semibold overflow-x-auto">
+      <div className="flex border-b border-[#3A2B27]/15 text-xs sm:text-sm font-semibold overflow-x-auto">
         <button
           onClick={() => setActiveSubTab('passes')}
           data-cursor="pointer"
           className={`py-3 px-5 border-b-2 flex items-center gap-2 transition-all whitespace-nowrap ${
             activeSubTab === 'passes'
-              ? 'border-[#8E3524] text-[#8E3524]'
-              : 'border-transparent text-[#5E5752] hover:text-[#211E1C]'
+              ? 'border-[#5C1D24] text-[#5C1D24]'
+              : 'border-transparent text-[#725C54] hover:text-[#3A2B27]'
           }`}
         >
           <Ticket className="w-4 h-4" />
@@ -179,8 +179,8 @@ export const MemberDashboard: React.FC<MemberDashboardProps> = ({
           data-cursor="pointer"
           className={`py-3 px-5 border-b-2 flex items-center gap-2 transition-all whitespace-nowrap ${
             activeSubTab === 'donations'
-              ? 'border-[#8E3524] text-[#8E3524]'
-              : 'border-transparent text-[#5E5752] hover:text-[#211E1C]'
+              ? 'border-[#5C1D24] text-[#5C1D24]'
+              : 'border-transparent text-[#725C54] hover:text-[#3A2B27]'
           }`}
         >
           <Flame className="w-4 h-4" />
@@ -192,18 +192,18 @@ export const MemberDashboard: React.FC<MemberDashboardProps> = ({
       {activeSubTab === 'passes' && (
         <div className="space-y-6">
           {(!currentUser.ticketPurchases || currentUser.ticketPurchases.length === 0) ? (
-            <div className="text-center py-16 bg-[#FFFFFF] rounded-xs border border-[#211E1C]/15 p-8 space-y-4">
-              <Ticket className="w-10 h-10 text-[#5E5752] mx-auto opacity-50" />
-              <h4 className="font-gambetta text-xl font-bold text-[#211E1C]">
+            <div className="text-center py-16 bg-[#FFFFFF] rounded-xs border border-[#3A2B27]/15 p-8 space-y-4">
+              <Ticket className="w-10 h-10 text-[#725C54] mx-auto opacity-50" />
+              <h4 className="font-gambetta text-xl font-bold text-[#3A2B27]">
                 No Passes Reserved Yet
               </h4>
-              <p className="text-xs text-[#5E5752] max-w-md mx-auto">
+              <p className="text-xs text-[#725C54] max-w-md mx-auto">
                 Reserve your seat at our intimate performances, collaborative mixers, and production labs in Kolkata.
               </p>
               <button
                 onClick={onExploreEvents}
                 data-cursor="pointer"
-                className="inline-flex items-center gap-2 px-6 py-2.5 text-xs font-bold uppercase rounded-xs bg-[#8E3524] text-[#FAF7F2]"
+                className="inline-flex items-center gap-2 px-6 py-2.5 text-xs font-bold uppercase rounded-xs bg-[#5C1D24] text-[#FFF5E9]"
               >
                 <span>Browse Gatherings</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -214,62 +214,62 @@ export const MemberDashboard: React.FC<MemberDashboardProps> = ({
               {currentUser.ticketPurchases.map((ticket) => (
                 <div
                   key={ticket.id}
-                  className="rounded-xs bg-[#FFFFFF] border border-[#211E1C]/15 p-6 space-y-4 shadow-xs flex flex-col justify-between"
+                  className="rounded-xs bg-[#FFFFFF] border border-[#3A2B27]/15 p-6 space-y-4 shadow-xs flex flex-col justify-between"
                 >
                   <div className="space-y-3">
-                    <div className="flex items-start justify-between border-b border-[#211E1C]/10 pb-3">
+                    <div className="flex items-start justify-between border-b border-[#3A2B27]/10 pb-3">
                       <div>
-                        <span className="text-[10px] font-mono uppercase text-[#8E3524] font-bold">
+                        <span className="text-[10px] font-mono uppercase text-[#5C1D24] font-bold">
                           Digital Entry Pass
                         </span>
-                        <h4 className="font-gambetta text-lg font-bold text-[#211E1C]">
+                        <h4 className="font-gambetta text-lg font-bold text-[#3A2B27]">
                           {ticket.eventTitle}
                         </h4>
                       </div>
-                      <div className="font-mono text-xs font-bold text-[#8E3524] bg-[#F3EDE2] px-2.5 py-1 rounded-xs">
+                      <div className="font-mono text-xs font-bold text-[#5C1D24] bg-[#F6EADB] px-2.5 py-1 rounded-xs">
                         {ticket.ticketCode}
                       </div>
                     </div>
 
-                    <div className="space-y-1.5 text-xs font-mono text-[#5E5752]">
-                      <div className="flex items-center gap-2 text-[#211E1C]">
-                        <Clock className="w-3.5 h-3.5 text-[#8E3524]" />
+                    <div className="space-y-1.5 text-xs font-mono text-[#725C54]">
+                      <div className="flex items-center gap-2 text-[#3A2B27]">
+                        <Clock className="w-3.5 h-3.5 text-[#5C1D24]" />
                         <span>{ticket.eventDate}</span>
                       </div>
                       <div className="flex items-start gap-2">
-                        <MapPin className="w-3.5 h-3.5 text-[#4A583A] shrink-0 mt-0.5" />
+                        <MapPin className="w-3.5 h-3.5 text-[#8A8E3E] shrink-0 mt-0.5" />
                         <span>{ticket.eventVenue}</span>
                       </div>
                     </div>
 
-                    <div className="p-3 bg-[#FAF7F2] rounded-xs border border-[#211E1C]/10 flex items-center justify-between text-xs">
+                    <div className="p-3 bg-[#FFF5E9] rounded-xs border border-[#3A2B27]/10 flex items-center justify-between text-xs">
                       <div>
-                        <span className="text-[#5E5752] block text-[10px]">Registered Name</span>
-                        <span className="font-semibold text-[#211E1C]">{ticket.buyerName} ({ticket.ticketCount} Seat)</span>
+                        <span className="text-[#725C54] block text-[10px]">Registered Name</span>
+                        <span className="font-semibold text-[#3A2B27]">{ticket.buyerName} ({ticket.ticketCount} Seat)</span>
                       </div>
                       <div className="text-right">
-                        <span className="text-[#5E5752] block text-[10px]">Pass Status</span>
-                        <span className="font-bold text-[#4A583A] uppercase">Confirmed</span>
+                        <span className="text-[#725C54] block text-[10px]">Pass Status</span>
+                        <span className="font-bold text-[#8A8E3E] uppercase">Confirmed</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Pass Actions: Calendar & ICS */}
-                  <div className="pt-3 border-t border-[#211E1C]/10 flex gap-2">
+                  <div className="pt-3 border-t border-[#3A2B27]/10 flex gap-2">
                     <button
                       onClick={() => handleGoogleCalendar(ticket)}
                       data-cursor="pointer"
-                      className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 text-[11px] font-semibold rounded-xs bg-[#F3EDE2] text-[#211E1C] hover:bg-[#EBE2D4] transition-colors"
+                      className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 text-[11px] font-semibold rounded-xs bg-[#F6EADB] text-[#3A2B27] hover:bg-[#EBE2D4] transition-colors"
                     >
-                      <CalendarPlus className="w-3.5 h-3.5 text-[#8E3524]" />
+                      <CalendarPlus className="w-3.5 h-3.5 text-[#5C1D24]" />
                       <span>Google Cal</span>
                     </button>
                     <button
                       onClick={() => handleDownloadICS(ticket)}
                       data-cursor="pointer"
-                      className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 text-[11px] font-semibold rounded-xs bg-[#FAF7F2] text-[#211E1C] hover:bg-[#F3EDE2] border border-[#211E1C]/15 transition-colors"
+                      className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 text-[11px] font-semibold rounded-xs bg-[#FFF5E9] text-[#3A2B27] hover:bg-[#F6EADB] border border-[#3A2B27]/15 transition-colors"
                     >
-                      <Download className="w-3.5 h-3.5 text-[#4A583A]" />
+                      <Download className="w-3.5 h-3.5 text-[#8A8E3E]" />
                       <span>{copiedPassId === ticket.id ? 'Exported!' : 'Apple / Outlook .ICS'}</span>
                     </button>
                   </div>
@@ -284,18 +284,18 @@ export const MemberDashboard: React.FC<MemberDashboardProps> = ({
       {activeSubTab === 'donations' && (
         <div className="space-y-6">
           {(!currentUser.donations || currentUser.donations.length === 0) ? (
-            <div className="text-center py-16 bg-[#FFFFFF] rounded-xs border border-[#211E1C]/15 p-8 space-y-4">
-              <Flame className="w-10 h-10 text-[#8E3524] mx-auto opacity-50" />
-              <h4 className="font-gambetta text-xl font-bold text-[#211E1C]">
+            <div className="text-center py-16 bg-[#FFFFFF] rounded-xs border border-[#3A2B27]/15 p-8 space-y-4">
+              <Flame className="w-10 h-10 text-[#5C1D24] mx-auto opacity-50" />
+              <h4 className="font-gambetta text-xl font-bold text-[#3A2B27]">
                 No Patronage Grants Recorded
               </h4>
-              <p className="text-xs text-[#5E5752] max-w-md mx-auto">
+              <p className="text-xs text-[#725C54] max-w-md mx-auto">
                 Help build physical sanctuaries and fund emerging artist stipends in Kolkata.
               </p>
               <button
                 onClick={onMakeDonation}
                 data-cursor="pointer"
-                className="inline-flex items-center gap-2 px-6 py-2.5 text-xs font-bold uppercase rounded-xs bg-[#8E3524] text-[#FAF7F2]"
+                className="inline-flex items-center gap-2 px-6 py-2.5 text-xs font-bold uppercase rounded-xs bg-[#5C1D24] text-[#FFF5E9]"
               >
                 <span>Support the Foundation</span>
               </button>
@@ -305,27 +305,27 @@ export const MemberDashboard: React.FC<MemberDashboardProps> = ({
               {currentUser.donations.map((don) => (
                 <div
                   key={don.id}
-                  className="rounded-xs bg-[#FFFFFF] border border-[#211E1C]/15 p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xs"
+                  className="rounded-xs bg-[#FFFFFF] border border-[#3A2B27]/15 p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xs"
                 >
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <span className="font-gambetta text-lg font-bold text-[#211E1C]">
+                      <span className="font-gambetta text-lg font-bold text-[#3A2B27]">
                         {don.tierName}
                       </span>
-                      <span className="px-2 py-0.5 text-[10px] font-mono uppercase bg-[#4A583A]/10 text-[#4A583A] rounded-xs">
+                      <span className="px-2 py-0.5 text-[10px] font-mono uppercase bg-[#8A8E3E]/10 text-[#8A8E3E] rounded-xs">
                         80G Exemption Valid
                       </span>
                     </div>
-                    <p className="text-xs text-[#5E5752] font-mono">
+                    <p className="text-xs text-[#725C54] font-mono">
                       Donation ID: {don.paymentId} · Date: {don.date} · Donor: {don.donorName}
                     </p>
                   </div>
 
                   <div className="text-right flex sm:flex-col items-center sm:items-end justify-between">
-                    <div className="font-serif text-2xl font-bold text-[#8E3524]">
+                    <div className="font-serif text-2xl font-bold text-[#5C1D24]">
                       ₹{don.amount.toLocaleString('en-IN')}
                     </div>
-                    <span className="text-[10px] text-[#4A583A] font-mono uppercase font-bold">
+                    <span className="text-[10px] text-[#8A8E3E] font-mono uppercase font-bold">
                       Completed & Tax Credited
                     </span>
                   </div>

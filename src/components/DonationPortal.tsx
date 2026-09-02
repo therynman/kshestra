@@ -59,40 +59,40 @@ export const DonationPortal: React.FC<DonationPortalProps> = ({ onInitiateDonati
   };
 
   return (
-    <section id="donate-portal" className="py-20 md:py-32 border-b border-[#211E1C]/15 bg-[#FAF7F2] relative overflow-hidden">
+    <section id="donate-portal" className="py-20 md:py-32 border-b border-[#3A2B27]/15 bg-[#FFF5E9] relative overflow-hidden">
       
       {/* Background Decorative Graphic */}
-      <div className="absolute top-10 left-1/2 -translate-x-1/2 pointer-events-none opacity-[0.03] select-none font-gambetta text-[24vw] font-bold text-[#8E3524] leading-none">
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 pointer-events-none opacity-[0.03] select-none font-gambetta text-[24vw] font-bold text-[#5C1D24] leading-none">
         GRANTS
       </div>
 
       <div className="max-w-5xl mx-auto px-4 sm:px-8 space-y-12 relative z-10">
         
         {/* Section Header Masthead */}
-        <div className="border-b-2 border-[#211E1C] pb-8 space-y-6">
+        <div className="border-b-2 border-[#3A2B27] pb-8 space-y-6">
           <div className="flex flex-wrap items-center justify-between gap-4 text-xs font-mono">
-            <div className="flex items-center gap-2 text-[#8E3524] font-bold tracking-widest uppercase">
-              <Flame className="w-4 h-4 text-[#C0822B] animate-pulse" />
+            <div className="flex items-center gap-2 text-[#5C1D24] font-bold tracking-widest uppercase">
+              <Flame className="w-4 h-4 text-[#8A8E3E] animate-pulse" />
               <span>PRESERVE THE FIRE · 80G REGISTERED TRUST</span>
             </div>
-            <div className="text-[#5E5752] uppercase tracking-wider flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-[#4A583A]" />
+            <div className="text-[#725C54] uppercase tracking-wider flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-[#8A8E3E]" />
               <span>100% DIRECT DISBURSEMENT TO PRODUCTION</span>
             </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
             <div className="lg:col-span-8 space-y-3">
-              <h2 className="font-gambetta text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#211E1C] leading-[1.08]">
+              <h2 className="font-gambetta text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#3A2B27] leading-[1.08]">
                 Art Asks for Courage, Not Charity
               </h2>
-              <p className="font-serif italic text-lg sm:text-2xl text-[#8E3524] leading-snug max-w-3xl">
+              <p className="font-serif italic text-lg sm:text-2xl text-[#5C1D24] leading-snug max-w-3xl">
                 "We do not solicit passive sympathy. We assemble visionary cultural patrons who recognize that free expression requires physical shelter and independent resources."
               </p>
             </div>
 
-            <div className="lg:col-span-4 space-y-2 border-l-2 lg:border-l-0 lg:border-r-2 border-[#8E3524] pl-4 lg:pl-0 lg:pr-4 py-1 text-xs font-mono text-[#5E5752]">
-              <div className="text-[#211E1C] font-bold uppercase tracking-wider">
+            <div className="lg:col-span-4 space-y-2 border-l-2 lg:border-l-0 lg:border-r-2 border-[#5C1D24] pl-4 lg:pl-0 lg:pr-4 py-1 text-xs font-mono text-[#725C54]">
+              <div className="text-[#3A2B27] font-bold uppercase tracking-wider">
                 Sanctum Endowment Charter
               </div>
               <p>
@@ -103,19 +103,19 @@ export const DonationPortal: React.FC<DonationPortalProps> = ({ onInitiateDonati
         </div>
 
         {/* Unified Real-Time Impact Calculator & Grant Inputter */}
-        <div className="bg-[#FFFFFF] border-2 border-[#211E1C] rounded-xs p-6 sm:p-10 shadow-md space-y-8">
+        <div className="bg-[#FFFFFF] border-2 border-[#3A2B27] rounded-xs p-6 sm:p-10 shadow-md space-y-8">
           
           {/* Header & Preset Amounts */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#211E1C]/15 pb-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#3A2B27]/15 pb-6">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xs bg-[#8E3524] text-[#FAF7F2] flex items-center justify-center p-2 shadow-xs shrink-0">
+              <div className="w-10 h-10 rounded-xs bg-[#5C1D24] text-[#FFF5E9] flex items-center justify-center p-2 shadow-xs shrink-0">
                 <Coins className="w-full h-full" />
               </div>
               <div>
-                <span className="text-[10px] font-mono uppercase font-bold tracking-widest text-[#8E3524]">
+                <span className="text-[10px] font-mono uppercase font-bold tracking-widest text-[#5C1D24]">
                   REAL-TIME IMPACT CALCULATOR
                 </span>
-                <h3 className="font-gambetta text-2xl sm:text-3xl font-bold text-[#211E1C]">
+                <h3 className="font-gambetta text-2xl sm:text-3xl font-bold text-[#3A2B27]">
                   Grant Impact: ₹{(grantAmount || 0).toLocaleString('en-IN')}
                 </h3>
               </div>
@@ -123,7 +123,7 @@ export const DonationPortal: React.FC<DonationPortalProps> = ({ onInitiateDonati
 
             {/* Quick-Preset Amount Chips */}
             <div className="flex flex-wrap items-center gap-1.5">
-              <span className="text-xs font-mono text-[#5E5752] mr-1">Quick Select:</span>
+              <span className="text-xs font-mono text-[#725C54] mr-1">Quick Select:</span>
               {PRESET_AMOUNTS.map((preset) => (
                 <button
                   key={preset.value}
@@ -132,8 +132,8 @@ export const DonationPortal: React.FC<DonationPortalProps> = ({ onInitiateDonati
                   data-cursor="pointer"
                   className={`px-3 py-1.5 text-xs font-mono font-bold rounded-xs border transition-all ${
                     grantAmount === preset.value
-                      ? 'bg-[#8E3524] text-[#FAF7F2] border-[#8E3524] shadow-xs'
-                      : 'bg-[#FAF7F2] text-[#211E1C] border-[#211E1C]/20 hover:border-[#8E3524]'
+                      ? 'bg-[#8A8E3E] text-[#FFF5E9] border-[#8A8E3E] shadow-xs'
+                      : 'bg-[#FFF5E9] text-[#3A2B27] border-[#3A2B27]/20 hover:border-[#8A8E3E]'
                   }`}
                 >
                   {preset.label}
@@ -144,43 +144,43 @@ export const DonationPortal: React.FC<DonationPortalProps> = ({ onInitiateDonati
 
           {/* 3 Dynamic Impact Visualizer Gauges */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="bg-[#FAF7F2] p-5 rounded-xs border border-[#211E1C]/15 flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xs bg-[#8E3524]/10 text-[#8E3524] flex items-center justify-center shrink-0">
-                <Sparkles className="w-6 h-6" />
+            <div className="bg-[#FFF5E9] p-5 rounded-xs border border-[#8A8E3E]/30 flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xs bg-[#5C1D24]/10 text-[#5C1D24] flex items-center justify-center shrink-0">
+                <Sparkles className="w-6 h-6 text-[#8A8E3E]" />
               </div>
               <div>
-                <div className="font-gambetta text-2xl sm:text-3xl font-bold text-[#8E3524]">
+                <div className="font-gambetta text-2xl sm:text-3xl font-bold text-[#5C1D24]">
                   {impactStats.studioHours}+ Hours
                 </div>
-                <div className="text-[11px] font-mono text-[#5E5752] uppercase font-bold tracking-wider leading-tight mt-0.5">
+                <div className="text-[11px] font-mono text-[#725C54] uppercase font-bold tracking-wider leading-tight mt-0.5">
                   Studio & Production Access
                 </div>
               </div>
             </div>
 
-            <div className="bg-[#FAF7F2] p-5 rounded-xs border border-[#211E1C]/15 flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xs bg-[#C0822B]/10 text-[#C0822B] flex items-center justify-center shrink-0">
-                <HeartHandshake className="w-6 h-6" />
+            <div className="bg-[#FFF5E9] p-5 rounded-xs border border-[#8A8E3E]/30 flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xs bg-[#8A8E3E]/15 text-[#8A8E3E] flex items-center justify-center shrink-0">
+                <HeartHandshake className="w-6 h-6 text-[#8A8E3E]" />
               </div>
               <div>
-                <div className="font-gambetta text-2xl sm:text-3xl font-bold text-[#211E1C]">
+                <div className="font-gambetta text-2xl sm:text-3xl font-bold text-[#8A8E3E]">
                   {impactStats.artistsEquipped} Creators
                 </div>
-                <div className="text-[11px] font-mono text-[#5E5752] uppercase font-bold tracking-wider leading-tight mt-0.5">
+                <div className="text-[11px] font-mono text-[#725C54] uppercase font-bold tracking-wider leading-tight mt-0.5">
                   Provided Working Materials
                 </div>
               </div>
             </div>
 
-            <div className="bg-[#FAF7F2] p-5 rounded-xs border border-[#211E1C]/15 flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xs bg-[#4A583A]/10 text-[#4A583A] flex items-center justify-center shrink-0">
-                <ShieldCheck className="w-6 h-6" />
+            <div className="bg-[#FFF5E9] p-5 rounded-xs border border-[#8A8E3E]/30 flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xs bg-[#8A8E3E]/15 text-[#8A8E3E] flex items-center justify-center shrink-0">
+                <ShieldCheck className="w-6 h-6 text-[#8A8E3E]" />
               </div>
               <div>
-                <div className="font-gambetta text-2xl sm:text-3xl font-bold text-[#4A583A]">
+                <div className="font-gambetta text-2xl sm:text-3xl font-bold text-[#8A8E3E]">
                   ₹{impactStats.taxSaving.toLocaleString('en-IN')}
                 </div>
-                <div className="text-[11px] font-mono text-[#5E5752] uppercase font-bold tracking-wider leading-tight mt-0.5">
+                <div className="text-[11px] font-mono text-[#725C54] uppercase font-bold tracking-wider leading-tight mt-0.5">
                   80G Tax Exemption (50%)
                 </div>
               </div>
@@ -188,15 +188,15 @@ export const DonationPortal: React.FC<DonationPortalProps> = ({ onInitiateDonati
           </div>
 
           {/* Grant Amount Inputter Form */}
-          <form onSubmit={handleSubmit} className="pt-4 border-t border-[#211E1C]/15 space-y-6">
+          <form onSubmit={handleSubmit} className="pt-4 border-t border-[#3A2B27]/15 space-y-6">
             <div className="space-y-2">
-              <label htmlFor="grant-amount-input" className="text-xs font-mono uppercase tracking-wider text-[#5E5752] font-bold block">
+              <label htmlFor="grant-amount-input" className="text-xs font-mono uppercase tracking-wider text-[#725C54] font-bold block">
                 Grant Amount (INR) — Adjust to any value or click presets above:
               </label>
 
               <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-stretch">
-                <div className="sm:col-span-8 h-14 flex items-center bg-[#FAF7F2] border-2 border-[#211E1C]/30 rounded-xs px-4 focus-within:border-[#8E3524] focus-within:bg-[#FFFFFF] focus-within:ring-1 focus-within:ring-[#8E3524] transition-colors">
-                  <span className="font-serif text-3xl font-bold text-[#8E3524] mr-3 select-none">₹</span>
+                <div className="sm:col-span-8 h-14 flex items-center bg-[#FFF5E9] border-2 border-[#3A2B27]/30 rounded-xs px-4 focus-within:border-[#5C1D24] focus-within:bg-[#FFFFFF] focus-within:ring-1 focus-within:ring-[#5C1D24] transition-colors">
+                  <span className="font-serif text-3xl font-bold text-[#5C1D24] mr-3 select-none">₹</span>
                   <input
                     id="grant-amount-input"
                     type="text"
@@ -204,19 +204,19 @@ export const DonationPortal: React.FC<DonationPortalProps> = ({ onInitiateDonati
                     placeholder="e.g. 50000"
                     value={inputValue}
                     onChange={handleInputChange}
-                    className="w-full text-xl sm:text-2xl font-mono font-bold bg-transparent text-[#211E1C] placeholder:text-[#5E5752]/40 focus:outline-none"
+                    className="w-full text-xl sm:text-2xl font-mono font-bold bg-transparent text-[#3A2B27] placeholder:text-[#725C54]/40 focus:outline-none"
                   />
                 </div>
 
                 <div className="sm:col-span-4">
-                  <label className="w-full h-14 flex items-center gap-2.5 cursor-pointer text-xs font-mono text-[#211E1C] bg-[#FAF7F2] px-4 rounded-xs border-2 border-[#211E1C]/30 hover:border-[#8E3524] transition-colors select-none">
+                  <label className="w-full h-14 flex items-center gap-2.5 cursor-pointer text-xs font-mono text-[#3A2B27] bg-[#FFF5E9] px-4 rounded-xs border-2 border-[#3A2B27]/30 hover:border-[#5C1D24] transition-colors select-none">
                     <input
                       type="checkbox"
                       checked={is80GRequested}
                       onChange={(e) => setIs80GRequested(e.target.checked)}
-                      className="rounded-xs accent-[#8E3524] w-4 h-4 cursor-pointer"
+                      className="rounded-xs accent-[#5C1D24] w-4 h-4 cursor-pointer"
                     />
-                    <FileText className="w-4 h-4 text-[#4A583A] shrink-0" />
+                    <FileText className="w-4 h-4 text-[#8A8E3E] shrink-0" />
                     <span className="font-bold">Claim 80G Certificate</span>
                   </label>
                 </div>
@@ -227,23 +227,23 @@ export const DonationPortal: React.FC<DonationPortalProps> = ({ onInitiateDonati
             <button
               type="submit"
               data-cursor="pointer"
-              className="w-full py-4 px-6 text-sm font-mono font-bold uppercase tracking-widest rounded-xs bg-[#8E3524] hover:bg-[#662215] text-[#FAF7F2] border border-[#211E1C]/20 shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 group"
+              className="w-full py-4 px-6 text-sm font-mono font-bold uppercase tracking-widest rounded-xs bg-[#5C1D24] hover:bg-[#431319] text-[#FFF5E9] border border-[#3A2B27]/20 shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 group"
             >
-              <Flame className="w-4 h-4 text-[#C0822B] group-hover:scale-110 transition-transform" />
+              <Flame className="w-4 h-4 text-[#8A8E3E] group-hover:scale-110 transition-transform" />
               <span>Pay Grant Money: ₹{(grantAmount || 0).toLocaleString('en-IN')}</span>
-              <ArrowUpRight className="w-4 h-4 text-[#FAF7F2] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              <ArrowUpRight className="w-4 h-4 text-[#FFF5E9] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </button>
           </form>
 
           {/* Footnote Docket */}
-          <div className="pt-4 border-t border-[#211E1C]/15 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-[#5E5752]">
+          <div className="pt-4 border-t border-[#3A2B27]/15 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-[#725C54]">
             <div className="flex items-center gap-2">
               <KshestraLogo preferAssetImage className="w-4 h-4 object-contain" />
               <span>Kshestra Cultural Foundation · Registered Section 80G Cultural Trust</span>
             </div>
             <div className="flex items-center gap-2">
-              <Award className="w-3.5 h-3.5 text-[#8E3524]" />
-              <span className="text-[#8E3524] font-bold">100% AUDITED FINANCIAL TRANSPARENCY</span>
+              <Award className="w-3.5 h-3.5 text-[#5C1D24]" />
+              <span className="text-[#5C1D24] font-bold">100% AUDITED FINANCIAL TRANSPARENCY</span>
             </div>
           </div>
 

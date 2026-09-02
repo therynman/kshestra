@@ -42,7 +42,7 @@ export const BottomThirdEventsTicker: React.FC<BottomThirdEventsTickerProps> = (
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       if (!isPlaying) {
-        ctx.fillStyle = '#8E3524';
+        ctx.fillStyle = '#8A8E3E';
         ctx.globalAlpha = 0.3;
         ctx.fillRect(0, canvas.height - 2, canvas.width, 2);
         return;
@@ -58,8 +58,8 @@ export const BottomThirdEventsTicker: React.FC<BottomThirdEventsTickerProps> = (
         const x = i * barWidth;
         const y = canvas.height - barHeight;
 
-        ctx.fillStyle = '#8E3524';
-        ctx.globalAlpha = 0.9;
+        ctx.fillStyle = '#8A8E3E';
+        ctx.globalAlpha = 0.95;
         ctx.fillRect(x + 1, y, barWidth - 2, barHeight);
       }
     };
@@ -88,7 +88,7 @@ export const BottomThirdEventsTicker: React.FC<BottomThirdEventsTickerProps> = (
   const tickerEvents = [...events, ...events, ...events, ...events];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 w-full z-40 select-none bg-[#FAF7F2] border-t border-[#211E1C]/20 shadow-2xl">
+    <div className="fixed bottom-0 left-0 right-0 w-full z-40 select-none bg-[#FFF5E9] border-t border-[#3A2B27]/20 shadow-2xl">
       <div className="w-full flex items-stretch h-10 sm:h-11">
         
         {/* LEFT 1: Inline Play / Pause Button */}
@@ -98,7 +98,7 @@ export const BottomThirdEventsTicker: React.FC<BottomThirdEventsTickerProps> = (
           data-cursor="pointer"
           title={isPlaying ? `Pause: ${OFFICIAL_TRACK.title}` : `Play: ${OFFICIAL_TRACK.title}`}
           aria-label="Toggle background score"
-          className="h-full px-3 sm:px-4 bg-[#8E3524] hover:bg-[#662215] text-[#FAF7F2] border-r border-[#211E1C]/20 flex items-center justify-center gap-1.5 transition-colors shrink-0 focus:outline-none"
+          className="h-full px-3 sm:px-4 bg-[#5C1D24] hover:bg-[#431319] text-[#FFF5E9] border-r border-[#3A2B27]/20 flex items-center justify-center gap-1.5 transition-colors shrink-0 focus:outline-none"
         >
           {isPlaying ? (
             <Pause className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-current" />
@@ -111,11 +111,11 @@ export const BottomThirdEventsTicker: React.FC<BottomThirdEventsTickerProps> = (
         </button>
 
         {/* LEFT 2: Inline Track Badge (MAIN BAAKI HU) & Small Volume Bar Below */}
-        <div className="h-full bg-[#F3EDE2] border-r border-[#211E1C]/20 px-2.5 sm:px-3 flex flex-col justify-center gap-0.5 shrink-0">
-          <div className="flex items-center gap-1.5 text-[9px] sm:text-[10px] font-mono font-bold text-[#8E3524] leading-tight">
+        <div className="h-full bg-[#F6EADB] border-r border-[#3A2B27]/20 px-2.5 sm:px-3 flex flex-col justify-center gap-0.5 shrink-0">
+          <div className="flex items-center gap-1.5 text-[9px] sm:text-[10px] font-mono font-bold text-[#5C1D24] leading-tight">
             <span className="relative flex h-1.5 w-1.5">
-              <span className={`animate-ping absolute inline-flex h-full w-full rounded-full bg-[#8E3524] ${isPlaying ? 'opacity-75' : 'opacity-0'}`} />
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#8E3524]" />
+              <span className={`animate-ping absolute inline-flex h-full w-full rounded-full bg-[#8A8E3E] ${isPlaying ? 'opacity-75' : 'opacity-0'}`} />
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#8A8E3E]" />
             </span>
             <span className="tracking-wider uppercase whitespace-nowrap font-bold">
               MAIN BAAKI HU
@@ -125,7 +125,7 @@ export const BottomThirdEventsTicker: React.FC<BottomThirdEventsTickerProps> = (
                 ref={canvasRef}
                 width={16}
                 height={8}
-                className="rounded-xs hidden sm:inline-block ml-0.5 opacity-80"
+                className="rounded-xs hidden sm:inline-block ml-0.5 opacity-90"
               />
             )}
           </div>
@@ -139,13 +139,13 @@ export const BottomThirdEventsTicker: React.FC<BottomThirdEventsTickerProps> = (
                 audioSynth.setVolume(newVol);
               }}
               data-cursor="pointer"
-              className="text-[#5E5752] hover:text-[#8E3524] transition-colors p-0 focus:outline-none"
+              className="text-[#725C54] hover:text-[#8A8E3E] transition-colors p-0 focus:outline-none"
               title={volume === 0 ? 'Unmute' : 'Mute'}
             >
               {volume === 0 ? (
-                <VolumeX className="w-2.5 h-2.5 text-[#8E3524]" />
+                <VolumeX className="w-2.5 h-2.5 text-[#5C1D24]" />
               ) : (
-                <Volume2 className="w-2.5 h-2.5 text-[#5E5752]" />
+                <Volume2 className="w-2.5 h-2.5 text-[#8A8E3E]" />
               )}
             </button>
             <input
@@ -155,7 +155,7 @@ export const BottomThirdEventsTicker: React.FC<BottomThirdEventsTickerProps> = (
               step="0.05"
               value={volume}
               onChange={handleVolumeChange}
-              className="w-14 sm:w-20 accent-[#8E3524] h-1 bg-[#211E1C]/15 rounded-xs cursor-pointer"
+              className="w-14 sm:w-20 accent-[#8A8E3E] h-1 bg-[#3A2B27]/15 rounded-xs cursor-pointer"
               title={`Volume: ${Math.round(volume * 100)}%`}
             />
           </div>
@@ -175,32 +175,32 @@ export const BottomThirdEventsTicker: React.FC<BottomThirdEventsTickerProps> = (
                 key={`${evt.id}-${idx}`}
                 onClick={() => handleEventClick(evt)}
                 data-cursor="pointer"
-                className="group flex items-center gap-2 sm:gap-3 cursor-pointer px-2 py-0.5 rounded-xs hover:bg-[#F3EDE2] transition-colors shrink-0"
+                className="group flex items-center gap-2 sm:gap-3 cursor-pointer px-2 py-0.5 rounded-xs hover:bg-[#F6EADB] transition-colors shrink-0"
               >
-                <div className="w-4 h-4 rounded-xs bg-[#FAF7F2] border border-[#211E1C]/20 flex items-center justify-center p-0.5 shrink-0">
+                <div className="w-4 h-4 rounded-xs bg-[#FFF5E9] border border-[#3A2B27]/20 flex items-center justify-center p-0.5 shrink-0">
                   <KshestraLogo preferAssetImage className="w-full h-full object-contain" />
                 </div>
 
                 <div className="flex items-center gap-2 font-mono text-[11px] sm:text-xs">
-                  <span className="text-[#8E3524] font-bold tracking-wider uppercase">
+                  <span className="text-[#8A8E3E] font-bold tracking-wider uppercase">
                     [{evt.date.split('·')[0].trim()}]
                   </span>
-                  <span className="font-gambetta text-xs sm:text-sm font-bold text-[#211E1C] group-hover:text-[#8E3524] transition-colors truncate max-w-[180px] sm:max-w-none">
+                  <span className="font-gambetta text-xs sm:text-sm font-bold text-[#3A2B27] group-hover:text-[#5C1D24] transition-colors truncate max-w-[180px] sm:max-w-none">
                     {evt.title}
                   </span>
                 </div>
 
-                <div className="flex items-center gap-1 text-[10px] font-mono text-[#5E5752] bg-[#211E1C]/5 px-1.5 py-0.5 rounded-xs shrink-0">
-                  <MapPin className="w-2.5 h-2.5 text-[#8E3524]" />
+                <div className="flex items-center gap-1 text-[10px] font-mono text-[#3A2B27] bg-[#8A8E3E]/15 border border-[#8A8E3E]/30 px-1.5 py-0.5 rounded-xs shrink-0 font-medium">
+                  <MapPin className="w-2.5 h-2.5 text-[#5C1D24]" />
                   <span>{evt.city}</span>
                 </div>
 
-                <div className="flex items-center gap-1 text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 bg-[#8E3524] text-[#FAF7F2] group-hover:bg-[#662215] rounded-xs transition-colors shrink-0">
+                <div className="flex items-center gap-1 text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 bg-[#5C1D24] text-[#FFF5E9] group-hover:bg-[#431319] rounded-xs transition-colors shrink-0">
                   <span>{evt.price === 0 ? 'FREE PASS' : `PASS ₹${evt.price}`}</span>
                   <ArrowUpRight className="w-2.5 h-2.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </div>
 
-                <span className="text-[#C0822B] text-xs font-serif pl-2">✦</span>
+                <span className="text-[#8A8E3E] text-xs font-serif pl-2">✦</span>
               </div>
             ))}
           </div>

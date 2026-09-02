@@ -39,7 +39,7 @@ export const AudioDock: React.FC = () => {
       if (!isPlaying) {
         // Resting line
         ctx.beginPath();
-        ctx.strokeStyle = '#8E3524';
+        ctx.strokeStyle = '#5C1D24';
         ctx.lineWidth = 1;
         ctx.globalAlpha = 0.3;
         ctx.moveTo(0, canvas.height / 2);
@@ -58,7 +58,7 @@ export const AudioDock: React.FC = () => {
         const x = i * barWidth;
         const y = (canvas.height - normalized) / 2;
 
-        ctx.fillStyle = i % 2 === 0 ? '#8E3524' : '#C0822B';
+        ctx.fillStyle = i % 2 === 0 ? '#5C1D24' : '#8A8E3E';
         ctx.globalAlpha = 0.9;
         ctx.fillRect(x + 1, y, barWidth - 2, normalized);
       }
@@ -80,7 +80,7 @@ export const AudioDock: React.FC = () => {
 
   return (
     <div className="fixed bottom-4 left-4 z-40 max-w-sm w-[calc(100vw-32px)] sm:w-80 select-none">
-      <div className="bg-[#FAF7F2]/95 backdrop-blur-md border border-[#211E1C]/20 rounded-xs shadow-lg p-3 transition-all duration-300 text-[#211E1C]">
+      <div className="bg-[#FFF5E9]/95 backdrop-blur-md border border-[#3A2B27]/20 rounded-xs shadow-lg p-3 transition-all duration-300 text-[#3A2B27]">
         
         {/* Top bar with audio visualizer & quick toggle */}
         <div className="flex items-center justify-between gap-2">
@@ -90,17 +90,17 @@ export const AudioDock: React.FC = () => {
               onClick={togglePlayback}
               data-cursor="pointer"
               title={isPlaying ? "Pause Background Music" : "Play Background Music: Main Baaki Hoon"}
-              className="w-8 h-8 rounded-xs shrink-0 flex items-center justify-center bg-[#8E3524] text-[#FAF7F2] hover:bg-[#662215] transition-colors shadow-xs"
+              className="w-8 h-8 rounded-xs shrink-0 flex items-center justify-center bg-[#5C1D24] text-[#FFF5E9] hover:bg-[#431319] transition-colors shadow-xs"
             >
               {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 translate-x-0.5" />}
             </button>
 
             <div className="overflow-hidden">
-              <div className="flex items-center gap-1.5 text-xs font-semibold tracking-wide text-[#211E1C] truncate">
-                <Disc3 className={`w-3.5 h-3.5 text-[#8E3524] shrink-0 ${isPlaying ? 'animate-spin' : ''}`} />
+              <div className="flex items-center gap-1.5 text-xs font-semibold tracking-wide text-[#3A2B27] truncate">
+                <Disc3 className={`w-3.5 h-3.5 text-[#5C1D24] shrink-0 ${isPlaying ? 'animate-spin' : ''}`} />
                 <span className="truncate">{OFFICIAL_TRACK.title}</span>
               </div>
-              <p className="text-[10px] text-[#5E5752] truncate font-mono">
+              <p className="text-[10px] text-[#725C54] truncate font-mono">
                 {isPlaying ? 'Kshestra Sanctuary Background Score' : 'Background Music · Tap to Play'}
               </p>
             </div>
@@ -112,7 +112,7 @@ export const AudioDock: React.FC = () => {
               ref={canvasRef}
               width={56}
               height={22}
-              className="rounded-xs bg-[#F3EDE2] border border-[#211E1C]/10"
+              className="rounded-xs bg-[#F6EADB] border border-[#3A2B27]/10"
             />
 
             {/* Expand options */}
@@ -121,7 +121,7 @@ export const AudioDock: React.FC = () => {
               onClick={() => setIsExpanded(!isExpanded)}
               data-cursor="pointer"
               aria-label="Toggle audio settings"
-              className="p-1 hover:bg-[#F3EDE2] rounded-xs text-[#5E5752] hover:text-[#211E1C] transition-colors"
+              className="p-1 hover:bg-[#F6EADB] rounded-xs text-[#725C54] hover:text-[#3A2B27] transition-colors"
             >
               {isExpanded ? <ChevronDown className="w-4 h-4" /> : <ChevronUp className="w-4 h-4" />}
             </button>
@@ -130,23 +130,23 @@ export const AudioDock: React.FC = () => {
 
         {/* Expandable Volume Slider & Track Details */}
         {isExpanded && (
-          <div className="mt-3 pt-3 border-t border-[#211E1C]/10 space-y-3">
+          <div className="mt-3 pt-3 border-t border-[#3A2B27]/10 space-y-3">
             
-            <div className="text-[10px] font-mono text-[#5E5752] bg-[#F3EDE2] p-2 rounded-xs border border-[#211E1C]/10 flex items-center justify-between">
+            <div className="text-[10px] font-mono text-[#725C54] bg-[#F6EADB] p-2 rounded-xs border border-[#3A2B27]/10 flex items-center justify-between">
               <div>
-                <div className="font-bold text-[#211E1C]">{OFFICIAL_TRACK.title}</div>
-                <div className="text-[#8E3524]">{OFFICIAL_TRACK.artist}</div>
+                <div className="font-bold text-[#3A2B27]">{OFFICIAL_TRACK.title}</div>
+                <div className="text-[#5C1D24]">{OFFICIAL_TRACK.artist}</div>
               </div>
-              <span className="px-1.5 py-0.5 bg-[#8E3524]/10 text-[#8E3524] text-[9px] font-bold rounded-xs">
+              <span className="px-1.5 py-0.5 bg-[#5C1D24]/10 text-[#5C1D24] text-[9px] font-bold rounded-xs">
                 MP3 STEREO
               </span>
             </div>
 
             {/* Volume Control */}
             <div className="space-y-1">
-              <div className="flex items-center justify-between text-[10px] font-mono text-[#5E5752]">
+              <div className="flex items-center justify-between text-[10px] font-mono text-[#725C54]">
                 <span className="flex items-center gap-1">
-                  {volume === 0 ? <VolumeX className="w-3 h-3" /> : <Volume2 className="w-3 h-3 text-[#8E3524]" />}
+                  {volume === 0 ? <VolumeX className="w-3 h-3" /> : <Volume2 className="w-3 h-3 text-[#5C1D24]" />}
                   Master Music Volume
                 </span>
                 <span>{Math.round(volume * 100)}%</span>
@@ -158,7 +158,7 @@ export const AudioDock: React.FC = () => {
                 step="0.05"
                 value={volume}
                 onChange={handleVolumeChange}
-                className="w-full h-1 bg-[#211E1C]/20 rounded-lg appearance-none cursor-pointer accent-[#8E3524]"
+                className="w-full h-1 bg-[#3A2B27]/20 rounded-lg appearance-none cursor-pointer accent-[#5C1D24]"
               />
             </div>
 

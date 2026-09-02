@@ -76,26 +76,26 @@ export const CustomCursor: React.FC = () => {
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="filter drop-shadow-[0_2px_4px_rgba(33,30,28,0.35)]"
+          className="filter drop-shadow-[0_2px_4px_rgba(58, 43, 39,0.35)]"
         >
           {/* Arrow Body: Dark Terracotta with sharp Charcoal stroke */}
           <path
             d="M3 2L9.5 21.5L13 13L21.5 9.5L3 2Z"
-            fill={isPointer ? '#8E3524' : '#211E1C'}
-            stroke="#FAF7F2"
+            fill={isPointer ? '#5C1D24' : '#3A2B27'}
+            stroke="#FFF5E9"
             strokeWidth="1.5"
             strokeLinejoin="round"
           />
           {/* Inner Accent Core */}
           <path
             d="M4.5 4.5L9.2 18L11.8 11.8L18 9.2L4.5 4.5Z"
-            fill={isPointer ? '#C0822B' : '#8E3524'}
+            fill={isPointer ? '#8A8E3E' : '#5C1D24'}
           />
         </svg>
 
         {/* Optional Context Label when hovering interactive targets with label */}
         {cursorLabel && (
-          <div className="absolute left-6 top-3 px-2 py-0.5 bg-[#211E1C] text-[#FAF7F2] border border-[#FAF7F2]/30 text-[9px] font-mono uppercase tracking-widest rounded-xs shadow-md whitespace-nowrap">
+          <div className="absolute left-6 top-3 px-2 py-0.5 bg-[#3A2B27] text-[#FFF5E9] border border-[#FFF5E9]/30 text-[9px] font-mono uppercase tracking-widest rounded-xs shadow-md whitespace-nowrap">
             {cursorLabel}
           </div>
         )}

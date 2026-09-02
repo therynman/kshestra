@@ -29,10 +29,10 @@ export const ThreeArtCanvas: React.FC = () => {
     const positions = new Float32Array(particleCount * 3);
     const colors = new Float32Array(particleCount * 3);
 
-    const colorTerracotta = new THREE.Color('#8E3524');
-    const colorMoss = new THREE.Color('#4A583A');
-    const colorOchre = new THREE.Color('#C0822B');
-    const colorCharcoal = new THREE.Color('#211E1C');
+    const colorTerracotta = new THREE.Color('#5C1D24');
+    const colorMoss = new THREE.Color('#8A8E3E');
+    const colorOchre = new THREE.Color('#8A8E3E');
+    const colorCharcoal = new THREE.Color('#3A2B27');
 
     for (let i = 0; i < particleCount; i++) {
       const theta = i * 0.22;
@@ -45,11 +45,11 @@ export const ThreeArtCanvas: React.FC = () => {
       positions[i * 3 + 1] = y;
       positions[i * 3 + 2] = z;
 
-      let chosenColor = colorTerracotta;
+      let chosenColor = colorMoss;
       const rand = Math.random();
-      if (rand < 0.35) chosenColor = colorMoss;
-      else if (rand < 0.65) chosenColor = colorTerracotta;
-      else if (rand < 0.85) chosenColor = colorOchre;
+      if (rand < 0.55) chosenColor = colorMoss;
+      else if (rand < 0.80) chosenColor = colorTerracotta;
+      else if (rand < 0.92) chosenColor = colorOchre;
       else chosenColor = colorCharcoal;
 
       colors[i * 3] = chosenColor.r;
@@ -62,10 +62,10 @@ export const ThreeArtCanvas: React.FC = () => {
 
     // Particle Material
     const pMaterial = new THREE.PointsMaterial({
-      size: 0.18,
+      size: 0.22,
       vertexColors: true,
       transparent: true,
-      opacity: 0.35,
+      opacity: 0.45,
       blending: THREE.NormalBlending
     });
 

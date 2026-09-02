@@ -2,8 +2,8 @@ import { EventItem, TeamMember, Artwork, GazetteArticle, UserMember, TicketPurch
 import { INITIAL_EVENTS, INITIAL_GUARDIANS, INITIAL_GALLERY_ITEMS, INITIAL_DISPATCHES } from '../data/initialData';
 
 const STORAGE_KEYS = {
-  EVENTS: 'kshestra_events_v2',
-  GUARDIANS: 'kshestra_guardians_v5',
+  EVENTS: 'kshestra_events_v3',
+  GUARDIANS: 'kshestra_guardians_v6',
   GALLERY: 'kshestra_gallery_v2',
   DISPATCHES: 'kshestra_dispatches_v2',
   CURRENT_USER: 'kshestra_current_user_v2',

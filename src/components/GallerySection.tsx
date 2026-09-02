@@ -32,23 +32,23 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onPatronizeArtwo
   const remainingItems = filteredItems.slice(1);
 
   return (
-    <section id="gallery-section" className="py-20 md:py-28 px-4 sm:px-8 border-b border-[#211E1C]/15 bg-[#FAF7F2] relative">
+    <section id="gallery-section" className="py-20 md:py-28 px-4 sm:px-8 border-b border-[#3A2B27]/15 bg-[#FFF5E9] relative">
       
       <div className="max-w-7xl mx-auto space-y-12">
         
         {/* Section Header: Museum Curatorial Docket */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b-2 border-[#211E1C] pb-6">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b-2 border-[#3A2B27] pb-6">
           <div className="space-y-2 max-w-2xl">
-            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#8E3524] font-bold">
-              <ImageIcon className="w-3.5 h-3.5 text-[#C0822B]" />
+            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#5C1D24] font-bold">
+              <ImageIcon className="w-3.5 h-3.5 text-[#8A8E3E]" />
               <span>VISUAL MEMORY</span>
             </div>
 
-            <h2 className="font-gambetta text-4xl sm:text-6xl font-bold tracking-tight text-[#211E1C]">
+            <h2 className="font-gambetta text-4xl sm:text-6xl font-bold tracking-tight text-[#3A2B27]">
               The Living Archive
             </h2>
 
-            <p className="font-sans text-sm sm:text-base text-[#5E5752] leading-relaxed">
+            <p className="font-sans text-sm sm:text-base text-[#725C54] leading-relaxed">
               A glimpse into past gatherings, pop-up sanctuaries, and the raw work produced within our walls.
             </p>
           </div>
@@ -65,8 +65,8 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onPatronizeArtwo
                 data-cursor="pointer"
                 className={`px-3.5 py-1.5 rounded-xs uppercase tracking-wider transition-all font-semibold ${
                   activeCategory === cat
-                    ? 'bg-[#211E1C] text-[#FAF7F2]'
-                    : 'bg-[#F3EDE2] text-[#211E1C] hover:bg-[#EBE2D4] border border-[#211E1C]/15'
+                    ? 'bg-[#8A8E3E] text-[#FFF5E9] border border-[#8A8E3E]'
+                    : 'bg-[#F6EADB] text-[#3A2B27] hover:bg-[#EBE2D4] border border-[#8A8E3E]/30 hover:border-[#8A8E3E]'
                 }`}
               >
                 {cat === 'all' ? 'All Archive' : cat}
@@ -85,50 +85,50 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onPatronizeArtwo
                 audioSynth.playChime();
                 setSelectedArtwork(leadItem);
               }}
-              className="group cursor-pointer grid grid-cols-1 lg:grid-cols-12 bg-[#FFFFFF] border-2 border-[#211E1C] shadow-md rounded-xs overflow-hidden"
+              className="group cursor-pointer grid grid-cols-1 lg:grid-cols-12 bg-[#FFFFFF] border-2 border-[#3A2B27] hover:border-[#8A8E3E] shadow-md rounded-xs overflow-hidden transition-colors"
             >
-              <div className="lg:col-span-7 relative h-72 sm:h-96 lg:h-[420px] bg-[#211E1C] overflow-hidden">
+              <div className="lg:col-span-7 relative h-72 sm:h-96 lg:h-[420px] bg-[#3A2B27] overflow-hidden">
                 <img
                   src={leadItem.image}
                   alt={leadItem.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-95"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute top-4 left-4 bg-[#FAF7F2] text-[#211E1C] px-3 py-1 text-xs font-mono uppercase tracking-widest font-bold rounded-xs border border-[#211E1C]/20 flex items-center gap-2">
+                <div className="absolute top-4 left-4 bg-[#FFF5E9] text-[#3A2B27] px-3 py-1 text-xs font-mono uppercase tracking-widest font-bold rounded-xs border border-[#3A2B27]/20 flex items-center gap-2">
                   <KshestraLogo preferAssetImage className="w-4 h-4" />
                   <span>PRIMARY ACCESSION RECORD</span>
                 </div>
-                <div className="absolute bottom-4 right-4 bg-[#FAF7F2] text-[#211E1C] px-3 py-1.5 text-xs font-mono font-bold rounded-xs flex items-center gap-1.5 shadow-md">
-                  <Eye className="w-3.5 h-3.5 text-[#8E3524]" />
+                <div className="absolute bottom-4 right-4 bg-[#FFF5E9] text-[#3A2B27] px-3 py-1.5 text-xs font-mono font-bold rounded-xs flex items-center gap-1.5 shadow-md">
+                  <Eye className="w-3.5 h-3.5 text-[#8A8E3E]" />
                   <span>INSPECT FULL PROVENANCE</span>
                 </div>
               </div>
 
-              <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between space-y-6 bg-[#FAF7F2]">
+              <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between space-y-6 bg-[#FFF5E9]">
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between text-xs font-mono text-[#8E3524] border-b border-[#211E1C]/15 pb-2">
-                    <span className="font-bold uppercase tracking-wider">{leadItem.category}</span>
-                    <span className="text-[#5E5752]">{leadItem.provenance}</span>
+                  <div className="flex items-center justify-between text-xs font-mono border-b border-[#3A2B27]/15 pb-2">
+                    <span className="font-bold uppercase tracking-wider text-[#8A8E3E]">{leadItem.category}</span>
+                    <span className="text-[#725C54]">{leadItem.provenance}</span>
                   </div>
 
-                  <h3 className="font-gambetta text-2xl sm:text-3xl font-bold text-[#211E1C] group-hover:text-[#8E3524] transition-colors leading-tight">
+                  <h3 className="font-gambetta text-2xl sm:text-3xl font-bold text-[#3A2B27] group-hover:text-[#5C1D24] transition-colors leading-tight">
                     "{leadItem.title}"
                   </h3>
 
                   {leadItem.bengaliTitle && (
-                    <div className="font-bengali text-sm text-[#8E3524] font-semibold">
+                    <div className="font-bengali text-sm text-[#5C1D24] font-semibold">
                       {leadItem.bengaliTitle}
                     </div>
                   )}
 
-                  <p className="font-sans text-sm text-[#211E1C]/80 leading-relaxed">
+                  <p className="font-sans text-sm text-[#3A2B27]/80 leading-relaxed">
                     {leadItem.description}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-[#211E1C]/15 flex items-center justify-between text-xs font-mono text-[#5E5752]">
-                  <span>Creator: <strong className="text-[#211E1C]">{leadItem.artist}</strong></span>
-                  <span className="text-[#8E3524] font-bold">Living Trust Collection</span>
+                <div className="pt-4 border-t border-[#3A2B27]/15 flex items-center justify-between text-xs font-mono text-[#725C54]">
+                  <span>Creator: <strong className="text-[#3A2B27]">{leadItem.artist}</strong></span>
+                  <span className="text-[#8A8E3E] font-bold">Living Trust Collection</span>
                 </div>
               </div>
             </div>
@@ -143,40 +143,40 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onPatronizeArtwo
                       audioSynth.playChime();
                       setSelectedArtwork(item);
                     }}
-                    className="group cursor-pointer bg-[#FFFFFF] border border-[#211E1C]/20 hover:border-[#8E3524] rounded-xs overflow-hidden transition-all hover:shadow-md flex flex-col justify-between"
+                    className="group cursor-pointer bg-[#FFFFFF] border border-[#3A2B27]/20 hover:border-[#8A8E3E] rounded-xs overflow-hidden transition-all hover:shadow-md flex flex-col justify-between"
                   >
                     <div>
-                      <div className="relative h-56 sm:h-64 bg-[#211E1C] overflow-hidden">
+                      <div className="relative h-56 sm:h-64 bg-[#3A2B27] overflow-hidden">
                         <img
                           src={item.image}
                           alt={item.title}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-95"
                           referrerPolicy="no-referrer"
                         />
-                        <div className="absolute top-3 left-3 bg-[#161413]/85 text-[#FAF7F2] px-2 py-0.5 text-[10px] font-mono uppercase tracking-widest rounded-xs">
+                        <div className="absolute top-3 left-3 bg-[#3A2B27]/85 text-[#FFF5E9] px-2 py-0.5 text-[10px] font-mono uppercase tracking-widest rounded-xs border border-[#8A8E3E]/40">
                           {item.provenance}
                         </div>
                       </div>
 
                       <div className="p-5 space-y-2">
-                        <div className="flex items-center justify-between text-[10px] font-mono uppercase text-[#8E3524] font-bold">
+                        <div className="flex items-center justify-between text-[10px] font-mono uppercase text-[#8A8E3E] font-bold">
                           <span>{item.category}</span>
-                          {item.bengaliTitle && <span className="font-bengali text-xs text-[#5E5752]">{item.bengaliTitle}</span>}
+                          {item.bengaliTitle && <span className="font-bengali text-xs text-[#725C54]">{item.bengaliTitle}</span>}
                         </div>
 
-                        <h4 className="font-gambetta text-xl font-bold text-[#211E1C] group-hover:text-[#8E3524] transition-colors leading-snug">
+                        <h4 className="font-gambetta text-xl font-bold text-[#3A2B27] group-hover:text-[#5C1D24] transition-colors leading-snug">
                           {item.title}
                         </h4>
 
-                        <p className="text-xs text-[#5E5752] line-clamp-2 leading-relaxed">
+                        <p className="text-xs text-[#725C54] line-clamp-2 leading-relaxed">
                           {item.description}
                         </p>
                       </div>
                     </div>
 
-                    <div className="px-5 pb-4 pt-2 border-t border-[#211E1C]/10 flex items-center justify-between text-xs font-mono text-[#5E5752]">
+                    <div className="px-5 pb-4 pt-2 border-t border-[#3A2B27]/10 flex items-center justify-between text-xs font-mono text-[#725C54]">
                       <span>By {item.artist}</span>
-                      <span className="text-[#8E3524] group-hover:translate-x-0.5 transition-transform">Inspect →</span>
+                      <span className="text-[#8A8E3E] group-hover:translate-x-0.5 transition-transform font-bold">Inspect →</span>
                     </div>
                   </div>
                 ))}
@@ -191,22 +191,22 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onPatronizeArtwo
       {/* High-Resolution Curatorial Modal */}
       <AnimatePresence>
         {selectedArtwork && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#161413]/90 backdrop-blur-md overflow-y-auto">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#3A2B27]/90 backdrop-blur-md overflow-y-auto">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-[#FAF7F2] rounded-xs max-w-4xl w-full border-2 border-[#211E1C] shadow-2xl overflow-hidden relative text-[#211E1C]"
+              className="bg-[#FFF5E9] rounded-xs max-w-4xl w-full border-2 border-[#3A2B27] shadow-2xl overflow-hidden relative text-[#3A2B27]"
             >
               {/* Modal Header */}
-              <div className="bg-[#211E1C] text-[#FAF7F2] p-4 sm:p-5 flex items-center justify-between">
+              <div className="bg-[#3A2B27] text-[#FFF5E9] p-4 sm:p-5 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <KshestraLogo preferAssetImage className="w-6 h-6" />
                   <div>
                     <h3 className="font-gambetta text-lg sm:text-xl font-bold">
                       {selectedArtwork.title}
                     </h3>
-                    <p className="text-[10px] text-[#FAF7F2]/70 font-mono">
+                    <p className="text-[10px] text-[#FFF5E9]/70 font-mono">
                       Accession Record: {selectedArtwork.provenance}
                     </p>
                   </div>
@@ -214,7 +214,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onPatronizeArtwo
                 <button
                   onClick={() => setSelectedArtwork(null)}
                   data-cursor="pointer"
-                  className="p-1.5 hover:bg-[#8E3524] rounded-xs text-[#FAF7F2] transition-colors"
+                  className="p-1.5 hover:bg-[#5C1D24] rounded-xs text-[#FFF5E9] transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -222,7 +222,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onPatronizeArtwo
 
               {/* Modal Body */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 sm:p-8">
-                <div className="relative rounded-xs overflow-hidden bg-[#211E1C] border border-[#211E1C]/20 max-h-96 flex items-center justify-center">
+                <div className="relative rounded-xs overflow-hidden bg-[#3A2B27] border border-[#3A2B27]/20 max-h-96 flex items-center justify-center">
                   <img
                     src={selectedArtwork.image}
                     alt={selectedArtwork.title}
@@ -234,25 +234,25 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onPatronizeArtwo
                 <div className="space-y-4 flex flex-col justify-between">
                   <div className="space-y-3">
                     <div className="space-y-1">
-                      <span className="text-[10px] font-mono uppercase text-[#8E3524] font-bold">
+                      <span className="text-[10px] font-mono uppercase text-[#5C1D24] font-bold">
                         {selectedArtwork.category} · {selectedArtwork.provenance}
                       </span>
-                      <h4 className="font-gambetta text-2xl font-bold text-[#211E1C]">
+                      <h4 className="font-gambetta text-2xl font-bold text-[#3A2B27]">
                         {selectedArtwork.title}
                       </h4>
                       {selectedArtwork.bengaliTitle && (
-                        <p className="font-bengali text-sm text-[#8E3524]">
+                        <p className="font-bengali text-sm text-[#5C1D24]">
                           {selectedArtwork.bengaliTitle}
                         </p>
                       )}
                     </div>
 
-                    <p className="text-xs sm:text-sm text-[#5E5752] leading-relaxed font-sans">
+                    <p className="text-xs sm:text-sm text-[#725C54] leading-relaxed font-sans">
                       {selectedArtwork.description}
                     </p>
 
-                    <div className="p-3 bg-[#F3EDE2] rounded-xs border border-[#211E1C]/10 text-xs font-mono space-y-1">
-                      <div>Artist: <strong className="text-[#211E1C]">{selectedArtwork.artist}</strong></div>
+                    <div className="p-3 bg-[#F6EADB] rounded-xs border border-[#3A2B27]/10 text-xs font-mono space-y-1">
+                      <div>Artist: <strong className="text-[#3A2B27]">{selectedArtwork.artist}</strong></div>
                       <div>Curator Note: Preserved under Kshestra Living Archive Trust.</div>
                     </div>
                   </div>
@@ -265,9 +265,9 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onPatronizeArtwo
                         onPatronizeArtwork(work);
                       }}
                       data-cursor="pointer"
-                      className="w-full py-3 px-4 text-xs font-bold uppercase tracking-wider rounded-xs bg-[#8E3524] hover:bg-[#662215] text-[#FAF7F2] transition-all flex items-center justify-center gap-2"
+                      className="w-full py-3 px-4 text-xs font-bold uppercase tracking-wider rounded-xs bg-[#5C1D24] hover:bg-[#431319] text-[#FFF5E9] transition-all flex items-center justify-center gap-2"
                     >
-                      <Flame className="w-4 h-4 text-[#C0822B]" />
+                      <Flame className="w-4 h-4 text-[#8A8E3E]" />
                       <span>Patronize / Support This Work</span>
                     </button>
                   )}

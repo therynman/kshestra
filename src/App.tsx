@@ -169,7 +169,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#FAF7F2] text-[#211E1C] selection:bg-[#8E3524] selection:text-[#FAF7F2] relative font-sans overflow-x-hidden">
+    <div className="min-h-screen w-full bg-[#FFF5E9] text-[#3A2B27] selection:bg-[#5C1D24] selection:text-[#FFF5E9] relative font-sans overflow-x-hidden">
       
       {/* Custom Art Cursor */}
       <CustomCursor />
@@ -191,7 +191,7 @@ export default function App() {
         
         {/* Return to Main Home Bar when in Member or Admin Views */}
         {currentView !== 'main' && (
-          <div className="bg-[#211E1C] text-[#FAF7F2] py-2.5 px-4 sm:px-8 border-b border-[#211E1C]">
+          <div className="bg-[#3A2B27] text-[#FFF5E9] py-2.5 px-4 sm:px-8 border-b border-[#3A2B27]">
             <div className="max-w-6xl mx-auto flex items-center justify-between">
               <button
                 onClick={() => {
@@ -199,13 +199,13 @@ export default function App() {
                   setCurrentView('main');
                 }}
                 data-cursor="pointer"
-                className="inline-flex items-center gap-2 font-mono text-xs uppercase font-bold hover:text-[#C98E3A] transition-colors"
+                className="inline-flex items-center gap-2 font-mono text-xs uppercase font-bold hover:text-[#8A8E3E] transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>Return to Sanctuary</span>
               </button>
 
-              <div className="font-mono text-xs text-[#C98E3A] font-bold uppercase">
+              <div className="font-mono text-xs text-[#8A8E3E] font-bold uppercase">
                 {currentView === 'admin' ? 'Trustee Administration View' : 'Personalized Resident Vault'}
               </div>
             </div>

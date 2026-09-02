@@ -37,17 +37,17 @@ export const KshestraLogo: React.FC<KshestraLogoProps> = ({
   if (!fillColor) {
     switch (variant) {
       case 'gold':
-        fillColor = '#C98E3A';
+        fillColor = '#8A8E3E';
         break;
       case 'white':
-        fillColor = '#FAF7F2';
+        fillColor = '#FFF5E9';
         break;
       case 'solid':
-        fillColor = '#161413';
+        fillColor = '#3A2B27';
         break;
       case 'terracotta':
       default:
-        fillColor = '#8E3524';
+        fillColor = '#5C1D24';
         break;
     }
   }
@@ -94,7 +94,7 @@ export const KshestraLogo: React.FC<KshestraLogoProps> = ({
           />
           
           {/* Eye of the Bankura Stallion */}
-          <circle cx="158" cy="186" r="4.5" fill={variant === 'white' ? '#161413' : '#FAF7F2'} />
+          <circle cx="158" cy="186" r="4.5" fill={variant === 'white' ? '#3A2B27' : '#FFF5E9'} />
 
           {/* 3 Feathers / Wings Slanted Upward Right */}
           {/* Feather 1 (Inner) */}

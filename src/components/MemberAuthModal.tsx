@@ -94,24 +94,24 @@ export const MemberAuthModal: React.FC<MemberAuthModalProps> = ({ onClose, onSuc
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#211E1C]/80 backdrop-blur-sm overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#3A2B27]/80 backdrop-blur-sm overflow-y-auto">
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="bg-[#FAF7F2] rounded-sm max-w-md w-full border border-[#211E1C]/20 shadow-2xl overflow-hidden relative text-[#211E1C]"
+        className="bg-[#FFF5E9] rounded-sm max-w-md w-full border border-[#3A2B27]/20 shadow-2xl overflow-hidden relative text-[#3A2B27]"
       >
         {/* Header */}
-        <div className="bg-[#F3EDE2] text-[#211E1C] p-6 flex items-center justify-between border-b border-[#211E1C]/15">
+        <div className="bg-[#F6EADB] text-[#3A2B27] p-6 flex items-center justify-between border-b border-[#3A2B27]/15">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-sm bg-[#8E3524] flex items-center justify-center p-1.5 shadow-xs">
-              <KshestraLogo variant="white" className="w-full h-full text-[#FAF7F2]" />
+            <div className="w-9 h-9 rounded-sm bg-[#5C1D24] flex items-center justify-center p-1.5 shadow-xs">
+              <KshestraLogo variant="white" className="w-full h-full text-[#FFF5E9]" />
             </div>
             <div>
-              <h3 className="font-serif-display text-lg font-bold text-[#211E1C]">
+              <h3 className="font-serif-display text-lg font-bold text-[#3A2B27]">
                 Enter the Sanctuary
               </h3>
-              <p className="text-[11px] text-[#5E5752] font-mono">
+              <p className="text-[11px] text-[#725C54] font-mono">
                 Kshestra Cultural Identity & Vault Access
               </p>
             </div>
@@ -119,7 +119,7 @@ export const MemberAuthModal: React.FC<MemberAuthModalProps> = ({ onClose, onSuc
           <button
             onClick={onClose}
             data-cursor="pointer"
-            className="p-1.5 hover:bg-[#8E3524]/10 rounded-sm text-[#211E1C] transition-colors"
+            className="p-1.5 hover:bg-[#5C1D24]/10 rounded-sm text-[#3A2B27] transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -129,17 +129,17 @@ export const MemberAuthModal: React.FC<MemberAuthModalProps> = ({ onClose, onSuc
         <div className="p-6 space-y-6">
           
           {/* Quick Demo Access Bar */}
-          <div className="bg-[#F3EDE2] p-3 rounded-sm border border-[#211E1C]/10 space-y-2">
-            <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-[#5E5752]">
+          <div className="bg-[#F6EADB] p-3 rounded-sm border border-[#3A2B27]/10 space-y-2">
+            <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-[#725C54]">
               <span>Quick Preview Logins:</span>
-              <span className="text-[#8E3524] font-bold">Demo Ready</span>
+              <span className="text-[#5C1D24] font-bold">Demo Ready</span>
             </div>
             <div className="grid grid-cols-2 gap-2">
               <button
                 type="button"
                 onClick={handleQuickDemoMember}
                 data-cursor="pointer"
-                className="px-2.5 py-1.5 text-xs font-semibold rounded-sm bg-[#FAF7F2] hover:bg-[#FFFFFF] text-[#211E1C] border border-[#211E1C]/15 transition-colors text-left truncate"
+                className="px-2.5 py-1.5 text-xs font-semibold rounded-sm bg-[#FFF5E9] hover:bg-[#FFFFFF] text-[#3A2B27] border border-[#3A2B27]/15 transition-colors text-left truncate"
               >
                 👤 Resident Creator
               </button>
@@ -147,7 +147,7 @@ export const MemberAuthModal: React.FC<MemberAuthModalProps> = ({ onClose, onSuc
                 type="button"
                 onClick={handleQuickDemoAdmin}
                 data-cursor="pointer"
-                className="px-2.5 py-1.5 text-xs font-semibold rounded-sm bg-[#FAF7F2] hover:bg-[#FFFFFF] text-[#8E3524] border border-[#211E1C]/15 transition-colors text-left truncate"
+                className="px-2.5 py-1.5 text-xs font-semibold rounded-sm bg-[#FFF5E9] hover:bg-[#FFFFFF] text-[#5C1D24] border border-[#3A2B27]/15 transition-colors text-left truncate"
               >
                 🛡️ Trustee Desk
               </button>
@@ -157,14 +157,14 @@ export const MemberAuthModal: React.FC<MemberAuthModalProps> = ({ onClose, onSuc
           {step === 'form' ? (
             <form onSubmit={handleSendVerification} className="space-y-4">
               
-              <div className="flex border-b border-[#211E1C]/15 pb-2 text-xs font-semibold">
+              <div className="flex border-b border-[#3A2B27]/15 pb-2 text-xs font-semibold">
                 <button
                   type="button"
                   onClick={() => setAuthMode('signin')}
                   className={`flex-1 py-1 text-center transition-colors ${
                     authMode === 'signin'
-                      ? 'text-[#8E3524] border-b-2 border-[#8E3524]'
-                      : 'text-[#5E5752] hover:text-[#211E1C]'
+                      ? 'text-[#5C1D24] border-b-2 border-[#5C1D24]'
+                      : 'text-[#725C54] hover:text-[#3A2B27]'
                   }`}
                 >
                   Member Sign In
@@ -174,8 +174,8 @@ export const MemberAuthModal: React.FC<MemberAuthModalProps> = ({ onClose, onSuc
                   onClick={() => setAuthMode('signup')}
                   className={`flex-1 py-1 text-center transition-colors ${
                     authMode === 'signup'
-                      ? 'text-[#8E3524] border-b-2 border-[#8E3524]'
-                      : 'text-[#5E5752] hover:text-[#211E1C]'
+                      ? 'text-[#5C1D24] border-b-2 border-[#5C1D24]'
+                      : 'text-[#725C54] hover:text-[#3A2B27]'
                   }`}
                 >
                   New Artist Registration
@@ -184,7 +184,7 @@ export const MemberAuthModal: React.FC<MemberAuthModalProps> = ({ onClose, onSuc
 
               {authMode === 'signup' && (
                 <div className="space-y-1">
-                  <label className="text-[11px] font-mono uppercase tracking-wider text-[#5E5752] block">
+                  <label className="text-[11px] font-mono uppercase tracking-wider text-[#725C54] block">
                     Full Legal / Artist Name
                   </label>
                   <input
@@ -193,13 +193,13 @@ export const MemberAuthModal: React.FC<MemberAuthModalProps> = ({ onClose, onSuc
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="e.g. Suman Sengupta"
-                    className="w-full px-3.5 py-2 text-xs bg-[#FFFFFF] border border-[#211E1C]/20 rounded-sm focus:border-[#8E3524] focus:outline-none"
+                    className="w-full px-3.5 py-2 text-xs bg-[#FFFFFF] border border-[#3A2B27]/20 rounded-sm focus:border-[#5C1D24] focus:outline-none"
                   />
                 </div>
               )}
 
               <div className="space-y-1">
-                <label className="text-[11px] font-mono uppercase tracking-wider text-[#5E5752] block">
+                <label className="text-[11px] font-mono uppercase tracking-wider text-[#725C54] block">
                   Email Address
                 </label>
                 <input
@@ -208,18 +208,18 @@ export const MemberAuthModal: React.FC<MemberAuthModalProps> = ({ onClose, onSuc
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="e.g. artist@domain.com"
-                  className="w-full px-3.5 py-2 text-xs bg-[#FFFFFF] border border-[#211E1C]/20 rounded-sm focus:border-[#8E3524] focus:outline-none"
+                  className="w-full px-3.5 py-2 text-xs bg-[#FFFFFF] border border-[#3A2B27]/20 rounded-sm focus:border-[#5C1D24] focus:outline-none"
                 />
               </div>
 
               {errorMsg && (
-                <p className="text-xs text-[#8E3524] font-medium">{errorMsg}</p>
+                <p className="text-xs text-[#5C1D24] font-medium">{errorMsg}</p>
               )}
 
               <button
                 type="submit"
                 data-cursor="pointer"
-                className="w-full py-3 text-xs font-bold uppercase tracking-wider rounded-sm bg-[#8E3524] hover:bg-[#662215] text-[#FAF7F2] border border-[#211E1C]/20 shadow-xs transition-all flex items-center justify-center gap-2"
+                className="w-full py-3 text-xs font-bold uppercase tracking-wider rounded-sm bg-[#5C1D24] hover:bg-[#431319] text-[#FFF5E9] border border-[#3A2B27]/20 shadow-xs transition-all flex items-center justify-center gap-2"
               >
                 <span>Dispatch One-Time Verification Pass</span>
                 <ArrowRight className="w-4 h-4" />
@@ -227,17 +227,17 @@ export const MemberAuthModal: React.FC<MemberAuthModalProps> = ({ onClose, onSuc
             </form>
           ) : (
             <form onSubmit={handleVerifyAndLogin} className="space-y-4">
-              <div className="bg-[#FAF7F2] p-3 rounded-sm border border-[#8E3524]/30 space-y-1">
-                <div className="text-[11px] font-mono uppercase text-[#8E3524] font-bold">
+              <div className="bg-[#FFF5E9] p-3 rounded-sm border border-[#5C1D24]/30 space-y-1">
+                <div className="text-[11px] font-mono uppercase text-[#5C1D24] font-bold">
                   Authentication Dispatch Sent
                 </div>
-                <p className="text-xs text-[#5E5752]">
-                  For prototype access, your code is: <strong className="text-[#8E3524] font-mono text-sm">{sentCode}</strong>
+                <p className="text-xs text-[#725C54]">
+                  For prototype access, your code is: <strong className="text-[#5C1D24] font-mono text-sm">{sentCode}</strong>
                 </p>
               </div>
 
               <div className="space-y-1">
-                <label className="text-[11px] font-mono uppercase tracking-wider text-[#5E5752] block">
+                <label className="text-[11px] font-mono uppercase tracking-wider text-[#725C54] block">
                   Enter 6-Digit Pass Code
                 </label>
                 <input
@@ -246,21 +246,21 @@ export const MemberAuthModal: React.FC<MemberAuthModalProps> = ({ onClose, onSuc
                   value={verificationCode}
                   onChange={(e) => setVerificationCode(e.target.value)}
                   placeholder="e.g. 829104"
-                  className="w-full px-3.5 py-2.5 text-center font-mono text-base tracking-widest bg-[#FFFFFF] border border-[#211E1C]/20 rounded-sm focus:border-[#8E3524] focus:outline-none"
+                  className="w-full px-3.5 py-2.5 text-center font-mono text-base tracking-widest bg-[#FFFFFF] border border-[#3A2B27]/20 rounded-sm focus:border-[#5C1D24] focus:outline-none"
                 />
               </div>
 
               {errorMsg && (
-                <p className="text-xs text-[#8E3524] font-medium">{errorMsg}</p>
+                <p className="text-xs text-[#5C1D24] font-medium">{errorMsg}</p>
               )}
 
               <button
                 type="submit"
                 data-cursor="pointer"
-                className="w-full py-3 text-xs font-bold uppercase tracking-wider rounded-sm bg-[#8E3524] hover:bg-[#662215] text-[#FAF7F2] border border-[#211E1C]/20 shadow-xs transition-all flex items-center justify-center gap-2"
+                className="w-full py-3 text-xs font-bold uppercase tracking-wider rounded-sm bg-[#5C1D24] hover:bg-[#431319] text-[#FFF5E9] border border-[#3A2B27]/20 shadow-xs transition-all flex items-center justify-center gap-2"
               >
                 <span>Verify & Enter Sanctuary</span>
-                <CheckCircle2 className="w-4 h-4 text-[#C0822B]" />
+                <CheckCircle2 className="w-4 h-4 text-[#8A8E3E]" />
               </button>
             </form>
           )}

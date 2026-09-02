@@ -67,7 +67,7 @@ export const RazorpayModal: React.FC<RazorpayModalProps> = ({
         particleCount: 90,
         spread: 70,
         origin: { y: 0.6 },
-        colors: ['#8E3524', '#C0822B', '#FAF7F2', '#4A583A']
+        colors: ['#5C1D24', '#8A8E3E', '#FFF5E9', '#8A8E3E']
       });
     } catch {}
   };
@@ -139,17 +139,17 @@ export const RazorpayModal: React.FC<RazorpayModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#211E1C]/80 backdrop-blur-sm overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#3A2B27]/80 backdrop-blur-sm overflow-y-auto">
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="bg-[#FAF7F2] rounded-sm max-w-lg w-full border border-[#211E1C]/20 shadow-2xl overflow-hidden relative text-[#211E1C]"
+        className="bg-[#FFF5E9] rounded-sm max-w-lg w-full border border-[#3A2B27]/20 shadow-2xl overflow-hidden relative text-[#3A2B27]"
       >
         {/* Header */}
-        <div className="bg-[#F3EDE2] text-[#211E1C] p-6 flex items-center justify-between border-b border-[#211E1C]/15">
+        <div className="bg-[#F6EADB] text-[#3A2B27] p-6 flex items-center justify-between border-b border-[#3A2B27]/15">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xs bg-[#FAF7F2] border border-[#211E1C]/20 flex items-center justify-center p-1 shadow-xs shrink-0">
+            <div className="w-10 h-10 rounded-xs bg-[#FFF5E9] border border-[#3A2B27]/20 flex items-center justify-center p-1 shadow-xs shrink-0">
               <img 
                 src="/assets/Kshestra Logo PNG.png" 
                 alt="Kshestra Foundation Logo" 
@@ -157,10 +157,10 @@ export const RazorpayModal: React.FC<RazorpayModalProps> = ({
               />
             </div>
             <div>
-              <h3 className="font-serif-display text-lg font-bold text-[#211E1C]">
+              <h3 className="font-serif-display text-lg font-bold text-[#3A2B27]">
                 {mode === 'ticket' ? 'Sanctum Gathering Pass' : 'Support the Kshestra Flame'}
               </h3>
-              <p className="text-[11px] text-[#5E5752] font-mono">
+              <p className="text-[11px] text-[#725C54] font-mono">
                 Kshestra Cultural Trust (80G Non-Profit)
               </p>
             </div>
@@ -168,7 +168,7 @@ export const RazorpayModal: React.FC<RazorpayModalProps> = ({
           <button
             onClick={onClose}
             data-cursor="pointer"
-            className="p-1.5 hover:bg-[#8E3524]/10 rounded-sm text-[#211E1C] transition-colors"
+            className="p-1.5 hover:bg-[#5C1D24]/10 rounded-sm text-[#3A2B27] transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -180,49 +180,49 @@ export const RazorpayModal: React.FC<RazorpayModalProps> = ({
           {/* Completed State */}
           {completedPurchase && (
             <div className="space-y-6 text-center py-2">
-              <div className="w-12 h-12 bg-[#4A583A]/10 text-[#4A583A] rounded-full flex items-center justify-center mx-auto">
+              <div className="w-12 h-12 bg-[#8A8E3E]/10 text-[#8A8E3E] rounded-full flex items-center justify-center mx-auto">
                 <Check className="w-6 h-6" />
               </div>
               <div className="space-y-1">
-                <h4 className="font-serif-display text-2xl font-bold text-[#211E1C]">
+                <h4 className="font-serif-display text-2xl font-bold text-[#3A2B27]">
                   Seat Reserved & Pass Issued
                 </h4>
-                <p className="text-xs text-[#5E5752] font-mono">
+                <p className="text-xs text-[#725C54] font-mono">
                   Pass Reference: {completedPurchase.ticketCode}
                 </p>
               </div>
 
               {/* Visual Archival Ticket Preview */}
-              <div className="bg-[#FFFFFF] p-5 rounded-sm border border-[#211E1C]/20 text-left space-y-3 shadow-xs">
-                <div className="flex justify-between items-start border-b border-[#211E1C]/10 pb-2">
+              <div className="bg-[#FFFFFF] p-5 rounded-sm border border-[#3A2B27]/20 text-left space-y-3 shadow-xs">
+                <div className="flex justify-between items-start border-b border-[#3A2B27]/10 pb-2">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-7 h-7 rounded-xs bg-[#FAF7F2] border border-[#211E1C]/15 flex items-center justify-center p-0.5 shrink-0">
+                    <div className="w-7 h-7 rounded-xs bg-[#FFF5E9] border border-[#3A2B27]/15 flex items-center justify-center p-0.5 shrink-0">
                       <img src="/assets/Kshestra Logo PNG.png" alt="Kshestra Logo" className="w-full h-full object-contain" />
                     </div>
                     <div>
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-[#8E3524]">Kshestra Sanctuary Entry</span>
-                      <h5 className="font-serif font-bold text-sm text-[#211E1C]">{completedPurchase.eventTitle}</h5>
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-[#5C1D24]">Kshestra Sanctuary Entry</span>
+                      <h5 className="font-serif font-bold text-sm text-[#3A2B27]">{completedPurchase.eventTitle}</h5>
                     </div>
                   </div>
-                  <div className="text-right font-mono text-xs font-bold text-[#8E3524]">
+                  <div className="text-right font-mono text-xs font-bold text-[#5C1D24]">
                     {completedPurchase.ticketCount} Pass(es)
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-2 text-xs font-mono text-[#5E5752]">
+                <div className="grid grid-cols-2 gap-2 text-xs font-mono text-[#725C54]">
                   <div>
-                    <span className="text-[9px] uppercase text-[#5E5752]/70 block">Time & Date</span>
-                    <span className="text-[#211E1C] font-semibold">{completedPurchase.eventDate}</span>
+                    <span className="text-[9px] uppercase text-[#725C54]/70 block">Time & Date</span>
+                    <span className="text-[#3A2B27] font-semibold">{completedPurchase.eventDate}</span>
                   </div>
                   <div>
-                    <span className="text-[9px] uppercase text-[#5E5752]/70 block">Holder</span>
-                    <span className="text-[#211E1C] font-semibold">{completedPurchase.buyerName}</span>
+                    <span className="text-[9px] uppercase text-[#725C54]/70 block">Holder</span>
+                    <span className="text-[#3A2B27] font-semibold">{completedPurchase.buyerName}</span>
                   </div>
                 </div>
 
-                <div className="pt-2 text-[10px] text-[#4A583A] font-mono bg-[#FAF7F2] p-2 rounded-sm flex items-center justify-between">
+                <div className="pt-2 text-[10px] text-[#8A8E3E] font-mono bg-[#FFF5E9] p-2 rounded-sm flex items-center justify-between">
                   <span>Digital Pass Added to Member Sanctuary Vault</span>
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#4A583A]" />
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#8A8E3E]" />
                 </div>
               </div>
 
@@ -230,7 +230,7 @@ export const RazorpayModal: React.FC<RazorpayModalProps> = ({
                 <button
                   onClick={onClose}
                   data-cursor="pointer"
-                  className="w-full py-3 text-xs font-bold uppercase rounded-sm bg-[#8E3524] text-[#FAF7F2] hover:bg-[#662215]"
+                  className="w-full py-3 text-xs font-bold uppercase rounded-sm bg-[#5C1D24] text-[#FFF5E9] hover:bg-[#431319]"
                 >
                   Done
                 </button>
@@ -240,28 +240,28 @@ export const RazorpayModal: React.FC<RazorpayModalProps> = ({
 
           {completedDonation && (
             <div className="space-y-6 text-center py-2">
-              <div className="w-12 h-12 bg-[#8E3524]/10 text-[#8E3524] rounded-full flex items-center justify-center mx-auto">
-                <Flame className="w-6 h-6 text-[#8E3524]" />
+              <div className="w-12 h-12 bg-[#5C1D24]/10 text-[#5C1D24] rounded-full flex items-center justify-center mx-auto">
+                <Flame className="w-6 h-6 text-[#5C1D24]" />
               </div>
               <div className="space-y-1">
-                <h4 className="font-serif-display text-2xl font-bold text-[#211E1C]">
+                <h4 className="font-serif-display text-2xl font-bold text-[#3A2B27]">
                   Thank You for Supporting the Flame
                 </h4>
-                <p className="text-xs text-[#5E5752] font-mono">
+                <p className="text-xs text-[#725C54] font-mono">
                   Receipt: {completedDonation.paymentId} · 80G Tax Exemption Applied
                 </p>
               </div>
 
-              <div className="bg-[#FFFFFF] p-5 rounded-sm border border-[#211E1C]/20 text-left space-y-2 text-xs">
-                <div className="flex justify-between font-bold text-[#211E1C]">
+              <div className="bg-[#FFFFFF] p-5 rounded-sm border border-[#3A2B27]/20 text-left space-y-2 text-xs">
+                <div className="flex justify-between font-bold text-[#3A2B27]">
                   <span>Contribution Amount</span>
-                  <span className="text-[#8E3524]">₹{completedDonation.amount.toLocaleString('en-IN')}</span>
+                  <span className="text-[#5C1D24]">₹{completedDonation.amount.toLocaleString('en-IN')}</span>
                 </div>
-                <div className="flex justify-between text-[#5E5752]">
+                <div className="flex justify-between text-[#725C54]">
                   <span>Tier / Grant</span>
                   <span>{completedDonation.tierName}</span>
                 </div>
-                <div className="flex justify-between text-[#5E5752]">
+                <div className="flex justify-between text-[#725C54]">
                   <span>Donor</span>
                   <span>{completedDonation.donorName}</span>
                 </div>
@@ -270,7 +270,7 @@ export const RazorpayModal: React.FC<RazorpayModalProps> = ({
               <button
                 onClick={onClose}
                 data-cursor="pointer"
-                className="w-full py-3 text-xs font-bold uppercase rounded-sm bg-[#8E3524] text-[#FAF7F2] hover:bg-[#662215]"
+                className="w-full py-3 text-xs font-bold uppercase rounded-sm bg-[#5C1D24] text-[#FFF5E9] hover:bg-[#431319]"
               >
                 Return to Sanctuary
               </button>
@@ -282,26 +282,26 @@ export const RazorpayModal: React.FC<RazorpayModalProps> = ({
             <div className="space-y-5">
               
               {mode === 'ticket' && event && (
-                <div className="bg-[#F3EDE2] p-4 rounded-sm border border-[#211E1C]/10 space-y-1">
-                  <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#8E3524]">
+                <div className="bg-[#F6EADB] p-4 rounded-sm border border-[#3A2B27]/10 space-y-1">
+                  <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#5C1D24]">
                     {event.category}
                   </div>
-                  <h4 className="font-serif-display text-base font-bold text-[#211E1C]">
+                  <h4 className="font-serif-display text-base font-bold text-[#3A2B27]">
                     {event.title}
                   </h4>
-                  <p className="text-xs text-[#5E5752] font-mono">
+                  <p className="text-xs text-[#725C54] font-mono">
                     {event.date} · {event.venue}
                   </p>
                 </div>
               )}
 
               {mode === 'donation' && (
-                <div className="bg-[#F3EDE2] p-4 rounded-sm border border-[#211E1C]/10 flex items-center justify-between">
+                <div className="bg-[#F6EADB] p-4 rounded-sm border border-[#3A2B27]/10 flex items-center justify-between">
                   <div>
-                    <span className="text-[10px] font-mono uppercase text-[#8E3524] font-bold block">Sanctuary Fellowship</span>
-                    <span className="font-serif font-bold text-base text-[#211E1C]">{donationTierName || 'Cultural Grant'}</span>
+                    <span className="text-[10px] font-mono uppercase text-[#5C1D24] font-bold block">Sanctuary Fellowship</span>
+                    <span className="font-serif font-bold text-base text-[#3A2B27]">{donationTierName || 'Cultural Grant'}</span>
                   </div>
-                  <div className="font-serif text-2xl font-bold text-[#8E3524]">
+                  <div className="font-serif text-2xl font-bold text-[#5C1D24]">
                     ₹{totalAmount.toLocaleString('en-IN')}
                   </div>
                 </div>
@@ -310,7 +310,7 @@ export const RazorpayModal: React.FC<RazorpayModalProps> = ({
               {/* User Details */}
               <div className="space-y-3">
                 <div className="space-y-1">
-                  <label className="text-[11px] font-mono uppercase tracking-wider text-[#5E5752] block">
+                  <label className="text-[11px] font-mono uppercase tracking-wider text-[#725C54] block">
                     Full Name
                   </label>
                   <input
@@ -318,12 +318,12 @@ export const RazorpayModal: React.FC<RazorpayModalProps> = ({
                     value={mode === 'ticket' ? buyerName : donorName}
                     onChange={(e) => mode === 'ticket' ? setBuyerName(e.target.value) : setDonorName(e.target.value)}
                     placeholder="e.g. Suman Sengupta"
-                    className="w-full px-3.5 py-2.5 text-xs bg-[#FFFFFF] border border-[#211E1C]/20 rounded-sm focus:border-[#8E3524] focus:outline-none"
+                    className="w-full px-3.5 py-2.5 text-xs bg-[#FFFFFF] border border-[#3A2B27]/20 rounded-sm focus:border-[#5C1D24] focus:outline-none"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[11px] font-mono uppercase tracking-wider text-[#5E5752] block">
+                  <label className="text-[11px] font-mono uppercase tracking-wider text-[#725C54] block">
                     Email for Pass & Dispatches
                   </label>
                   <input
@@ -331,28 +331,28 @@ export const RazorpayModal: React.FC<RazorpayModalProps> = ({
                     value={mode === 'ticket' ? buyerEmail : donorEmail}
                     onChange={(e) => mode === 'ticket' ? setBuyerEmail(e.target.value) : setDonorEmail(e.target.value)}
                     placeholder="e.g. suman@domain.com"
-                    className="w-full px-3.5 py-2.5 text-xs bg-[#FFFFFF] border border-[#211E1C]/20 rounded-sm focus:border-[#8E3524] focus:outline-none"
+                    className="w-full px-3.5 py-2.5 text-xs bg-[#FFFFFF] border border-[#3A2B27]/20 rounded-sm focus:border-[#5C1D24] focus:outline-none"
                   />
                 </div>
 
                 {mode === 'ticket' && event && event.price > 0 && (
                   <div className="space-y-1">
-                    <label className="text-[11px] font-mono uppercase tracking-wider text-[#5E5752] block">
+                    <label className="text-[11px] font-mono uppercase tracking-wider text-[#725C54] block">
                       Number of Seats
                     </label>
                     <div className="flex items-center gap-3">
                       <select
                         value={ticketCount}
                         onChange={(e) => setTicketCount(parseInt(e.target.value, 10))}
-                        className="px-3.5 py-2.5 text-xs bg-[#FFFFFF] border border-[#211E1C]/20 rounded-sm focus:border-[#8E3524] focus:outline-none"
+                        className="px-3.5 py-2.5 text-xs bg-[#FFFFFF] border border-[#3A2B27]/20 rounded-sm focus:border-[#5C1D24] focus:outline-none"
                       >
                         <option value={1}>1 Seat (₹{event.price * 1})</option>
                         <option value={2}>2 Seats (₹{event.price * 2})</option>
                         <option value={3}>3 Seats (₹{event.price * 3})</option>
                         <option value={4}>4 Seats (₹{event.price * 4})</option>
                       </select>
-                      <span className="text-xs text-[#5E5752] font-mono">
-                        Total: <strong className="text-[#8E3524]">₹{totalAmount}</strong>
+                      <span className="text-xs text-[#725C54] font-mono">
+                        Total: <strong className="text-[#5C1D24]">₹{totalAmount}</strong>
                       </span>
                     </div>
                   </div>
@@ -360,9 +360,9 @@ export const RazorpayModal: React.FC<RazorpayModalProps> = ({
               </div>
 
               {/* Razorpay Simulation Disclaimer */}
-              <div className="flex items-center justify-between text-[11px] text-[#5E5752] bg-[#FAF7F2] p-2.5 rounded-sm border border-[#211E1C]/10 font-mono">
+              <div className="flex items-center justify-between text-[11px] text-[#725C54] bg-[#FFF5E9] p-2.5 rounded-sm border border-[#3A2B27]/10 font-mono">
                 <span className="flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#4A583A]" />
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#8A8E3E]" />
                   <span>Encrypted Razorpay Gateway</span>
                 </span>
                 <span>Direct Trust Credit</span>
@@ -373,7 +373,7 @@ export const RazorpayModal: React.FC<RazorpayModalProps> = ({
                 onClick={handleProcessPayment}
                 disabled={isProcessing}
                 data-cursor="pointer"
-                className="w-full py-3.5 text-xs font-bold uppercase tracking-wider rounded-sm bg-[#8E3524] hover:bg-[#662215] text-[#FAF7F2] border border-[#211E1C]/20 transition-all shadow-md flex items-center justify-center gap-2"
+                className="w-full py-3.5 text-xs font-bold uppercase tracking-wider rounded-sm bg-[#5C1D24] hover:bg-[#431319] text-[#FFF5E9] border border-[#3A2B27]/20 transition-all shadow-md flex items-center justify-center gap-2"
               >
                 {isProcessing ? (
                   <span>Securing Reservation...</span>

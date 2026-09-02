@@ -13,6 +13,8 @@ export const CustomCursor: React.FC = () => {
       return;
     }
 
+    document.body.classList.add('custom-cursor-active');
+
     const onMouseMove = (e: MouseEvent) => {
       setMousePos({ x: e.clientX, y: e.clientY });
       if (!isVisible) setIsVisible(true);
@@ -45,6 +47,7 @@ export const CustomCursor: React.FC = () => {
     document.addEventListener('mouseenter', onMouseEnter);
 
     return () => {
+      document.body.classList.remove('custom-cursor-active');
       window.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseleave', onMouseLeave);
       document.removeEventListener('mouseenter', onMouseEnter);
@@ -53,42 +56,50 @@ export const CustomCursor: React.FC = () => {
 
   if (!isVisible) return null;
 
-  return (
-    <>
-      {/* Tiny precise dot */}
-      <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] w-2 h-2 rounded-full bg-[#5C1D24]"
-        animate={{
-          x: mousePos.x - 4,
-          y: mousePos.y - 4,
-          scale: cursorType === 'pointer' ? 0.5 : 1
-        }}
-        transition={{ type: 'spring', damping: 28, stiffness: 450, mass: 0.1 }}
-      />
+  const isPointer = cursorType === 'pointer';
 
-      {/* Trailing artistic ring with label */}
-      <motion.div
-        className={`fixed top-0 left-0 pointer-events-none z-[9998] flex items-center justify-center rounded-full border transition-colors duration-200 ${
-          cursorType === 'pointer'
-            ? 'border-[#5C1D24] bg-[#5C1D24]/10 backdrop-blur-[1px]'
-            : cursorType === 'zoom'
-            ? 'border-[#8A8E3E] bg-[#8A8E3E]/20'
-            : 'border-[#5C1D24]/40 bg-transparent'
-        }`}
-        animate={{
-          x: mousePos.x - (cursorType === 'pointer' ? (cursorLabel ? 45 : 24) : 16),
-          y: mousePos.y - (cursorType === 'pointer' ? (cursorLabel ? 45 : 24) : 16),
-          width: cursorType === 'pointer' ? (cursorLabel ? 90 : 48) : 32,
-          height: cursorType === 'pointer' ? (cursorLabel ? 90 : 48) : 32,
-        }}
-        transition={{ type: 'spring', damping: 22, stiffness: 260, mass: 0.2 }}
-      >
+  return (
+    <motion.div
+      className="fixed top-0 left-0 pointer-events-none z-[99999] flex items-start select-none"
+      animate={{
+        x: mousePos.x,
+        y: mousePos.y,
+        scale: isPointer ? 1.15 : 1
+      }}
+      transition={{ type: 'spring', damping: 30, stiffness: 600, mass: 0.08 }}
+    >
+      {/* Sleek Custom Editorial Arrow Cursor */}
+      <div className="relative -top-0.5 -left-0.5">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="filter drop-shadow-[0_2px_4px_rgba(33,30,28,0.35)]"
+        >
+          {/* Arrow Body: Dark Terracotta with sharp Charcoal stroke */}
+          <path
+            d="M3 2L9.5 21.5L13 13L21.5 9.5L3 2Z"
+            fill={isPointer ? '#8E3524' : '#211E1C'}
+            stroke="#FAF7F2"
+            strokeWidth="1.5"
+            strokeLinejoin="round"
+          />
+          {/* Inner Accent Core */}
+          <path
+            d="M4.5 4.5L9.2 18L11.8 11.8L18 9.2L4.5 4.5Z"
+            fill={isPointer ? '#C0822B' : '#8E3524'}
+          />
+        </svg>
+
+        {/* Optional Context Label when hovering interactive targets with label */}
         {cursorLabel && (
-          <span className="text-[10px] font-mono-meta uppercase tracking-widest text-[#5C1D24] font-bold text-center px-1">
+          <div className="absolute left-6 top-3 px-2 py-0.5 bg-[#211E1C] text-[#FAF7F2] border border-[#FAF7F2]/30 text-[9px] font-mono uppercase tracking-widest rounded-xs shadow-md whitespace-nowrap">
             {cursorLabel}
-          </span>
+          </div>
         )}
-      </motion.div>
-    </>
+      </div>
+    </motion.div>
   );
 };

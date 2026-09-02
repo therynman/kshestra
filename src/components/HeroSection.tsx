@@ -36,12 +36,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   return (
     <section className="relative w-full pt-10 pb-16 md:pt-16 md:pb-24 px-4 sm:px-8 border-b border-[#211E1C]/15 bg-[#FAF7F2] overflow-hidden">
       
-      {/* Background Subtle Script Watermark */}
-      <div className="absolute top-12 right-8 pointer-events-none opacity-[0.03] select-none hidden lg:block">
-        <span className="font-gambetta text-[22vw] font-bold text-[#211E1C] leading-none">
-          {heroScripts[activeScriptIdx]}
-        </span>
-      </div>
+      {/* Background Subtle Architectural Dotted Pattern */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.15] select-none"
+        style={{
+          backgroundImage: 'radial-gradient(#211E1C 1.2px, transparent 1.2px)',
+          backgroundSize: '24px 24px'
+        }}
+      />
 
       <div className="max-w-7xl mx-auto space-y-10 relative z-10">
         
@@ -141,8 +143,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           <div className="lg:col-span-4 space-y-4">
             <div className="relative rounded-xs border-2 border-[#211E1C] bg-[#211E1C] shadow-lg overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=1000&q=80"
-                alt="Kshestra Foundation Sanctuary Studio Kolkata"
+                src="/assets/Images/kshestra_puja.png"
+                alt="Kshestra Foundation"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (!target.dataset.triedJpg) {
+                    target.dataset.triedJpg = 'true';
+                    target.src = '/assets/Images/kshestra_puja.jpg';
+                  } else {
+                    target.src = 'https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=1000&q=80';
+                  }
+                }}
                 className="w-full h-80 sm:h-96 object-cover opacity-90 hover:scale-105 transition-transform duration-700"
                 referrerPolicy="no-referrer"
               />

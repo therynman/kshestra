@@ -285,15 +285,6 @@ export const Header: React.FC<HeaderProps> = ({
             )}
           </div>
 
-          {/* Univerte Commercial Bridge */}
-          <button
-            onClick={() => handleNavTo('univerte-pipeline-section')}
-            className="flex items-center gap-1 py-1 text-[#211E1C] hover:text-[#8E3524] transition-colors tracking-wide font-sans text-sm"
-          >
-            <span>Univerte Commercial Bridge</span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-[#8E3524]" />
-          </button>
-
         </nav>
 
         {/* Navigation Actions: Support the Flame & Enter the Sanctuary */}
@@ -399,16 +390,6 @@ export const Header: React.FC<HeaderProps> = ({
                 className="text-left py-1.5 text-xs font-mono text-[#211E1C] hover:text-[#8E3524]"
               >
                 ✦ Open Calls & Creative Residencies
-              </button>
-            </div>
-
-            <div className="pt-2">
-              <button
-                onClick={() => handleNavTo('univerte-pipeline-section')}
-                className="text-left py-1.5 text-xs font-mono font-bold text-[#8E3524] flex items-center gap-1"
-              >
-                <span>Univerte Commercial Bridge</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>

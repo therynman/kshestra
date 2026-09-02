@@ -201,7 +201,7 @@ export const INITIAL_GUARDIANS: TeamMember[] = [
     role: "Founder & Chief Visionary",
     bio: "A cultural strategist and filmmaker committed to dismantling gatekept networks. Tamohan conceived Kshestra as a direct response to the systemic isolation faced by grassroots creators, establishing physical art sanctuaries with shared production resources in Kolkata.",
     fullBio: "Tamohan has championed decentralized cultural spaces across South Asia. His focus centers on eliminating the middleman between independent makers and real production resources.",
-    portrait: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
+    portrait: "/assets/Images/tamohan.png",
     medium: "Filmmaking, Cultural Strategy, Sanctum Architecture",
     quote: "Art is not a luxury, an afterthought, or an idle hobby. It is the fundamental architecture of human conscience."
   },
@@ -211,7 +211,7 @@ export const INITIAL_GUARDIANS: TeamMember[] = [
     role: "Chairperson & Cultural Curator",
     bio: "An artist and creative director dedicated to preserving indigenous art forms while encouraging avant-garde experimentation. Oindrila steers the trust's cultural ethos, exhibition curations, and community residency initiatives.",
     fullBio: "Oindrila coordinates our regional research circles, indigenous pigment labs, and seasonal open-air exhibitions.",
-    portrait: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
+    portrait: "/assets/Images/oindrila.png",
     medium: "Curatorial Direction, Visual Arts & Living Archives",
     quote: "We preserve indigenous memory not by locking it in glass cabinets, but by placing it in the hands of hungry young creators."
   },
@@ -221,7 +221,7 @@ export const INITIAL_GUARDIANS: TeamMember[] = [
     role: "Vice Chairperson & Community Director",
     bio: "Writer and creative organizer specializing in cross-disciplinary initiatives. Nayanika leads Kshestra's regional outreach, member growth, and strategic community alliances across India.",
     fullBio: "Nayanika designs our cross-discipline matchmaking circles and manages relationships with regional artist guilds.",
-    portrait: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80",
+    portrait: "/assets/Images/nayanika.png",
     medium: "Literature, Community Organizing, Creative Outreach",
     quote: "Great art is born in communion. When we tear down isolation, the creative impulse becomes unstoppable."
   },
@@ -231,7 +231,7 @@ export const INITIAL_GUARDIANS: TeamMember[] = [
     role: "General Secretary & Systems Architect",
     bio: "Technology consultant and media archivist. Shubhadeep manages the trust’s digital governance, community infrastructure, and technical platforms that keep our open directories functional and secure.",
     fullBio: "Shubhadeep builds open-source digital infrastructure for decentralized archiving and zero-fee artist discovery.",
-    portrait: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+    portrait: "/assets/Images/shubhadeep.png",
     medium: "Digital Governance, Media Archiving, Open Platforms",
     quote: "Technology is a tool of liberation. We build systems that automate the tedium so artists can stay in flow."
   },
@@ -241,7 +241,7 @@ export const INITIAL_GUARDIANS: TeamMember[] = [
     role: "Treasurer & Financial Custodian",
     bio: "Financial advisor and arts advocate. Vireshwar oversees the allocation of public donations, micro-grants, and institutional audits to guarantee that every rupee raised directly empowers resident artists.",
     fullBio: "Vireshwar enforces strict 100% transparent fiscal oversight, micro-stipend disbursements, and trust compliance.",
-    portrait: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80",
+    portrait: "/assets/Images/vira.png",
     medium: "Fiscal Stewardship, Non-Profit Governance, Micro-Grants",
     quote: "Dignity in craft begins with economic stability. Every contribution is accounted for down to the last rupee."
   },
@@ -251,7 +251,7 @@ export const INITIAL_GUARDIANS: TeamMember[] = [
     role: "Head of Artist Relations & Talent Liaison",
     bio: "Actor and community coordinator. Aryan acts as the personal bridge between aspiring creators, workshop mentors, and incoming studio scouts, ensuring no new talent gets lost in the crowd.",
     fullBio: "Aryan runs the weekly matchmaking circles and rapid-crew assembly tables at the Kolkata sanctum.",
-    portrait: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80",
+    portrait: "/assets/Images/Aryan.png",
     medium: "Theatre Arts, Talent Coordination, Mentorship Liaison",
     quote: "No passionate creator should ever have to stand outside the door wondering if their voice belongs."
   },
@@ -261,7 +261,7 @@ export const INITIAL_GUARDIANS: TeamMember[] = [
     role: "Design Lead & Head of Visual Identity",
     bio: "Multidisciplinary brand designer and founder of design agency Saypollo. Sayan architects Kshestra’s visual systems, spatial design touchpoints, and creative identity, ensuring every medium honors the collective's raw, uncompromising aesthetic.",
     fullBio: "Sayan oversees all visual languages, typography pairings, physical sanctum spatial signage, and printed dispatches.",
-    portrait: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=800&q=80",
+    portrait: "/assets/Images/Sayan.png",
     medium: "Brand Systems, Typography, Spatial Design & Saypollo",
     quote: "Aesthetics are not superficial decoration; they are the physical manifestation of our collective soul."
   }

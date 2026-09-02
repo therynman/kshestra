@@ -178,14 +178,14 @@ export const BottomThirdEventsTicker: React.FC<BottomThirdEventsTickerProps> = (
         {/* REST OF BANNER: Extended fully from left to right */}
         <div className="flex-1 min-w-0 flex items-center bg-[#FFFFFF] overflow-hidden relative">
           
-          {/* Live Sanctum Status Badge */}
+          {/* Audio Track Status Badge */}
           <div className="shrink-0 h-full bg-[#F3EDE2] border-r border-[#211E1C]/20 px-3 sm:px-4 flex items-center gap-2 text-[10px] sm:text-xs font-mono font-bold text-[#8E3524] z-20">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#8E3524] opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#8E3524]"></span>
             </span>
-            <span className="tracking-wider uppercase whitespace-nowrap">
-              <span className="hidden sm:inline">LIVE PROGRAMME · </span>KOLKATA 2026
+            <span className="tracking-wider uppercase whitespace-nowrap font-bold">
+              MAIN BAAKI HU
             </span>
           </div>
 

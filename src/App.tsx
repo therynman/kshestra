@@ -15,7 +15,6 @@ import { GallerySection } from './components/GallerySection';
 import { TeamSection } from './components/TeamSection';
 import { GazetteSection } from './components/GazetteSection';
 import { NewsletterSection } from './components/NewsletterSection';
-import { UnivertePipelineSection } from './components/UnivertePipelineSection';
 import { DonationPortal } from './components/DonationPortal';
 import { RazorpayModal } from './components/RazorpayModal';
 import { MemberAuthModal } from './components/MemberAuthModal';
@@ -210,10 +209,7 @@ export default function App() {
             {/* 8. STAY IN THE CIRCLE (NEWSLETTER & DISPATCH INTAKE) */}
             <NewsletterSection />
 
-            {/* 9. THE COMMERCIAL COMPASS (THE UNIVERTE PIPELINE) */}
-            <UnivertePipelineSection />
-
-            {/* 10. PATRONAGE & GRANTS (PRESERVE THE FIRE / 80G GRANTS) */}
+            {/* 9. PATRONAGE & GRANTS (PRESERVE THE FIRE / 80G GRANTS) */}
             <DonationPortal onInitiateDonation={handleInitiateDonation} />
           </motion.div>
         )}

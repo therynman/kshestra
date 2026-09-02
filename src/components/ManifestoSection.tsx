@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { KSHESTRA_MANIFESTO } from '../data/initialData';
-import { Feather, Shield, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Feather, Shield, CheckCircle2 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { KshestraLogo } from './KshestraLogo';
 
 export const ManifestoSection: React.FC = () => {
-  const [activePrinciple, setActivePrinciple] = useState<number | null>(null);
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+
+  const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
 
   return (
     <section id="manifesto-section" className="py-20 md:py-32 px-4 sm:px-8 border-b border-[#211E1C]/15 bg-[#FAF7F2] relative">
@@ -15,7 +17,7 @@ export const ManifestoSection: React.FC = () => {
         X
       </div>
 
-      <div className="max-w-7xl mx-auto space-y-16 relative z-10">
+      <div className="max-w-6xl mx-auto space-y-16 relative z-10">
         
         {/* Editorial Section Masthead */}
         <div className="border-b-2 border-[#211E1C] pb-8 space-y-6">
@@ -44,67 +46,71 @@ export const ManifestoSection: React.FC = () => {
                 A Binding Covenant For Free Art
               </p>
               <p>
-                Ten non-negotiable statutes governing residency, resources, dignity, and collective protection.
+                Ten sequential statutes governing residency, resources, dignity, and collective protection.
               </p>
             </div>
           </div>
         </div>
 
-        {/* Structured Broadsheet Ledger (Not generic boxes!) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-x-12 lg:gap-y-10">
+        {/* STACKED ONE UPON ANOTHER (Sequential Editorial Ledger - Not Boxes!) */}
+        <div className="border-t-2 border-[#211E1C] divide-y divide-[#211E1C]/20">
           {KSHESTRA_MANIFESTO.principles.map((p, idx) => {
-            const isHovered = activePrinciple === idx;
+            const isHovered = hoveredIdx === idx;
+            const roman = romanNumerals[idx] || `${idx + 1}`;
+
             return (
               <motion.article
                 key={p.num}
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.35, delay: idx * 0.04 }}
-                onMouseEnter={() => setActivePrinciple(idx)}
-                onMouseLeave={() => setActivePrinciple(null)}
-                className={`relative bg-[#FFFFFF] border-2 transition-all duration-300 rounded-xs flex flex-col justify-between overflow-hidden shadow-xs ${
-                  isHovered 
-                    ? 'border-[#8E3524] shadow-md -translate-y-0.5' 
-                    : 'border-[#211E1C]/20 hover:border-[#8E3524]/60'
+                transition={{ duration: 0.3, delay: idx * 0.03 }}
+                onMouseEnter={() => setHoveredIdx(idx)}
+                onMouseLeave={() => setHoveredIdx(null)}
+                className={`py-8 sm:py-10 transition-colors duration-200 ${
+                  isHovered ? 'bg-[#F3EDE2]/60' : 'bg-transparent'
                 }`}
               >
-                {/* Top Corner Index Stripe */}
-                <div className="flex items-center justify-between px-6 py-3 bg-[#F3EDE2] border-b border-[#211E1C]/15 font-mono text-xs">
-                  <div className="flex items-center gap-2">
-                    <span className="px-2 py-0.5 bg-[#8E3524] text-[#FAF7F2] font-bold rounded-xs text-[10px] tracking-widest">
-                      TENET {p.num}
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-start">
+                  
+                  {/* Left Rail: Roman Numeral & Tenet Number */}
+                  <div className="md:col-span-3 lg:col-span-2 flex md:flex-col items-baseline md:items-start justify-between md:justify-start gap-2">
+                    <span className="font-gambetta text-3xl sm:text-4xl lg:text-5xl font-bold text-[#8E3524] tracking-tight leading-none">
+                      {roman}
                     </span>
-                    <span className="text-[#5E5752] text-[10px] tracking-wider uppercase hidden sm:inline">
-                      ARTICLE {idx + 1} OF 10
+                    <span className="text-[10px] font-mono tracking-widest text-[#5E5752] uppercase font-bold">
+                      STATUTE 0{idx + 1}
                     </span>
                   </div>
-                  <span className="text-[#8E3524] font-serif text-sm">✦</span>
-                </div>
 
-                {/* Core Statement Body */}
-                <div className="p-6 sm:p-7 space-y-4 flex-1">
-                  <h3 className="font-gambetta text-2xl sm:text-3xl font-bold text-[#211E1C] leading-snug">
-                    {p.title}
-                  </h3>
+                  {/* Center/Main Column: Title & Pull-Quote Statement */}
+                  <div className="md:col-span-9 lg:col-span-10 space-y-4">
+                    <div className="flex flex-wrap items-baseline gap-3">
+                      <h3 className="font-gambetta text-2xl sm:text-3xl font-bold text-[#211E1C] tracking-tight">
+                        {p.title}
+                      </h3>
+                    </div>
 
-                  {/* Creed Quote with Terracotta Bar */}
-                  <div className="border-l-3 border-[#8E3524] pl-4 py-1">
-                    <p className="font-serif italic text-base sm:text-lg text-[#211E1C] font-semibold leading-relaxed">
-                      "{p.statement}"
-                    </p>
+                    {/* Creed Statement */}
+                    <div className="border-l-3 border-[#8E3524] pl-4 sm:pl-5 py-1">
+                      <p className="font-serif italic text-base sm:text-lg lg:text-xl text-[#211E1C] font-semibold leading-relaxed">
+                        "{p.statement}"
+                      </p>
+                    </div>
+
+                    {/* Sanctuary Action Mechanism */}
+                    <div className="pt-2 flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-3 text-xs font-sans text-[#5E5752]">
+                      <span className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase font-bold tracking-wider text-[#8E3524] shrink-0">
+                        <Shield className="w-3.5 h-3.5 text-[#8E3524]" />
+                        <span>SANCTUARY ACTION:</span>
+                      </span>
+                      <span className="text-[#211E1C]/85 leading-relaxed">
+                        {p.tangibleMechanism}
+                      </span>
+                    </div>
+
                   </div>
-                </div>
 
-                {/* Grounding Action / Tangible Mechanism Footer */}
-                <div className="px-6 py-4 bg-[#FAF7F2] border-t border-[#211E1C]/15 font-sans text-xs sm:text-sm text-[#5E5752] space-y-1.5">
-                  <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase font-bold tracking-wider text-[#8E3524]">
-                    <Shield className="w-3 h-3 text-[#8E3524]" />
-                    <span>SANCTUARY ACTION MECHANISM</span>
-                  </div>
-                  <p className="leading-relaxed text-[#211E1C]/80">
-                    {p.tangibleMechanism}
-                  </p>
                 </div>
               </motion.article>
             );

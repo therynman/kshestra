@@ -183,3 +183,11 @@
   animation-play-state: paused;
 }
 
+/* Hide default OS cursor when custom arrow cursor is enabled */
+@media (pointer: fine) {
+  body.custom-cursor-active,
+  body.custom-cursor-active * {
+    cursor: none !important;
+  }
+}
+

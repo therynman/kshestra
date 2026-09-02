@@ -1,18 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 interface KshestraLogoProps {
   className?: string;
   size?: number | string;
   color?: string;
   variant?: 'solid' | 'gold' | 'terracotta' | 'white';
+  preferAssetImage?: boolean;
 }
 
 export const KshestraLogo: React.FC<KshestraLogoProps> = ({
   className = 'w-8 h-8',
   size,
   color,
-  variant = 'terracotta'
+  variant = 'terracotta',
+  preferAssetImage = false
 }) => {
+  const [imageError, setImageError] = useState(false);
+
+  // If user requested direct PNG asset and it hasn't failed to load
+  if (preferAssetImage && !imageError) {
+    const style = size ? { width: size, height: size } : undefined;
+    return (
+      <img
+        src="/assets/Kshestra Logo PNG.png"
+        alt="Kshestra Foundation Logo"
+        onError={() => setImageError(true)}
+        className={`inline-block shrink-0 object-contain ${className}`}
+        style={style}
+        referrerPolicy="no-referrer"
+      />
+    );
+  }
+
   // Determine fill color based on variant if explicit color is not provided
   let fillColor = color;
   if (!fillColor) {
@@ -28,7 +47,7 @@ export const KshestraLogo: React.FC<KshestraLogoProps> = ({
         break;
       case 'terracotta':
       default:
-        fillColor = '#4A181C';
+        fillColor = '#8E3524';
         break;
     }
   }
@@ -45,94 +64,6 @@ export const KshestraLogo: React.FC<KshestraLogoProps> = ({
       aria-label="Kshestra Logo"
     >
       <g fill={fillColor}>
-        {/* Left vertical trunk & Bankura horse head/chest */}
-        {/* Horse Head, Ear, Neck arch, Base pillar */}
-        <path
-          d="M148 125 L165 142 L225 142 C236 142 245 151 245 162 C245 180 238 210 215 235 C190 262 185 272 185 290 L185 375 L235 375 L235 310 C235 295 240 280 248 268 L248 375 L148 375 L148 245 C148 220 162 195 178 182 C189 173 192 165 190 158 C188 152 182 148 175 148 L160 148 L160 170 L148 170 Z"
-          fillRule="evenodd"
-          style={{ display: 'none' }}
-        />
-        
-        {/* Precise High-Fidelity Silhouette of the Kshestra Bankura Stallion Monogram */}
-        <path
-          d="M 148 141
-             L 133 141
-             L 148 168
-             L 148 186
-             C 148 195 152 205 163 205
-             C 169 205 170 198 170 188
-             C 170 176 179 174 188 175
-             C 190 193 180 216 160 236
-             C 148 248 148 266 148 285
-             L 148 375
-             L 233 375
-             L 233 313
-             C 233 313 234 313 235 313
-             L 235 375
-             L 148 375
-             Z"
-          style={{ display: 'none' }}
-        />
-
-        {/* Unified Geometry Matching the Bankura Horse 'K' Motif */}
-        {/* Left Column + Head + Chest */}
-        <path
-          d="M 148 141 
-             L 132 141 
-             L 148 168 
-             L 148 185 
-             C 148 196 153 205 169 205 
-             C 170 195 170 186 170 176 
-             C 170 163 177 154 189 153 
-             C 192 173 182 200 164 220 
-             C 148 238 148 265 148 288 
-             L 148 375 
-             L 233 375 
-             L 233 255 
-             C 220 255 195 240 185 220
-             C 195 200 220 180 233 170
-             L 233 141 
-             C 215 141 190 141 160 141 
-             Z"
-             style={{ display: 'none' }}
-        />
-
-        {/* Exact Direct Silhouette from Logo Asset */}
-        <path
-          d="M 148 141
-             L 132 141
-             L 148 168
-             L 148 186
-             C 148 200 155 206 170 206
-             C 171 194 171 185 171 176
-             C 171 160 180 152 190 152
-             C 192 176 182 205 162 225
-             C 148 240 148 262 148 285
-             L 148 375
-             L 233 375
-             L 233 255
-             L 245 255
-             L 245 375
-             L 368 375
-             C 368 350 365 330 355 315
-             C 340 290 305 280 280 280
-             C 260 280 248 285 245 290
-             L 245 255
-             L 270 255
-             L 368 141
-             L 345 141
-             L 293 255
-             L 270 255
-             L 322 141
-             L 299 141
-             L 247 255
-             L 233 255
-             L 270 141
-             L 220 141
-             C 200 141 170 141 148 141 Z"
-             style={{ display: 'none' }}
-        />
-
         {/* MASTER VECTOR DEFINITION: Pristine Bankura Stallion 'K' Monogram */}
         <g id="kshestra-monogram">
           {/* Main horse torso, base, and junction */}
@@ -179,3 +110,4 @@ export const KshestraLogo: React.FC<KshestraLogoProps> = ({
     </svg>
   );
 };
+

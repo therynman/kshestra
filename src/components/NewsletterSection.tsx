@@ -54,6 +54,11 @@ export const NewsletterSection: React.FC = () => {
           <p className="text-base sm:text-lg text-[#5E5752] leading-relaxed font-sans">
             Bi-weekly field notes on craft and survival, early ticket reservations, and unlisted casting calls & residency grants delivered straight to your inbox. No promotional noise. No algorithms. Just pure dispatches.
           </p>
+
+          <div className="p-3.5 bg-[#FAF7F2] border border-[#211E1C]/15 rounded-xs text-xs font-mono text-[#8E3524] font-semibold flex items-center justify-center gap-2">
+            <Sparkles className="w-4 h-4 text-[#C0822B]" />
+            <span>Instant Gift: Subscribers receive our curated PDF: "The Independent Creator’s Resource & Grant Directory (Kolkata Edition)"</span>
+          </div>
         </div>
 
         {/* Newsletter Signup Box */}
@@ -124,10 +129,9 @@ export const NewsletterSection: React.FC = () => {
               <button
                 type="submit"
                 data-cursor="pointer"
-                className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 text-xs font-bold uppercase tracking-wider rounded-sm bg-[#8E3524] hover:bg-[#662215] text-[#FAF7F2] border border-[#211E1C]/30 shadow-xs transition-all hover:-translate-y-0.5"
+                className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 text-xs font-bold uppercase tracking-wider rounded-xs bg-[#8E3524] hover:bg-[#662215] text-[#FAF7F2] border border-[#211E1C]/30 shadow-xs transition-all hover:-translate-y-0.5"
               >
-                <span>Subscribe to Dispatches & Open Calls</span>
-                <ArrowRight className="w-4 h-4" />
+                <span>Subscribe to Dispatches & Get Free Directory ⟶</span>
               </button>
 
               {/* Microcopy Reassurance */}

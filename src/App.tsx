@@ -8,7 +8,6 @@ import { CustomCursor } from './components/CustomCursor';
 import { ThreeArtCanvas } from './components/ThreeArtCanvas';
 import { AudioDock } from './components/AudioDock';
 import { Header } from './components/Header';
-import { WelcomeCurtain } from './components/WelcomeCurtain';
 import { BottomThirdEventsTicker } from './components/BottomThirdEventsTicker';
 import { HeroSection } from './components/HeroSection';
 import { ManifestoSection } from './components/ManifestoSection';
@@ -149,7 +148,7 @@ export default function App() {
       {/* Persistent Meditative Sanctum Drone Audio Dock */}
       <AudioDock />
 
-      {/* 1. Header & Top Navigation */}
+      {/* 1. Header & Top Navigation with Smart Hide on Scroll Down */}
       <Header
         onOpenAuth={handleOpenAuth}
         onOpenDashboard={handleOpenDashboard}
@@ -158,8 +157,8 @@ export default function App() {
         onScrollToSection={handleScrollTo}
       />
 
-      {/* MAIN VIEW SWITCHER */}
-      <main className="relative z-10 w-full">
+      {/* MAIN VIEW SWITCHER - padded for fixed header */}
+      <main className="relative z-10 w-full pt-[74px] sm:pt-[78px]">
         
         {/* Return to Main Home Bar when in Member or Admin Views */}
         {currentView !== 'main' && (
@@ -174,7 +173,7 @@ export default function App() {
                 className="inline-flex items-center gap-2 font-mono text-xs uppercase font-bold hover:text-[#C98E3A] transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
-                <span>Return to Sanctuary (মূল প্রচ্ছদ)</span>
+                <span>Return to Sanctuary</span>
               </button>
 
               <div className="font-mono text-xs text-[#C98E3A] font-bold uppercase">
@@ -206,7 +205,7 @@ export default function App() {
             {/* 5. THE LIVING ARCHIVE (GALLERY & PROVENANCE) */}
             <GallerySection onPatronizeArtwork={handlePatronizeArtwork} />
 
-            {/* 6. GUARDIANS OF THE SANCTUARY (TEAM & LEADERSHIP) */}
+            {/* 6. GUARDIANS OF THE SANCTUARY (THE PILLARS) */}
             <TeamSection />
 
             {/* 7. DISPATCHES FROM THE SANCTUARY (MAGAZINE & FIELD JOURNALS) */}
@@ -218,7 +217,7 @@ export default function App() {
             {/* 9. THE COMMERCIAL COMPASS (THE UNIVERTE PIPELINE) */}
             <UnivertePipelineSection />
 
-            {/* 10. PATRONAGE & SUPPORT (PRESERVE THE FIRE / 80G DONATIONS) */}
+            {/* 10. PATRONAGE & GRANTS (PRESERVE THE FIRE / 80G GRANTS) */}
             <DonationPortal onInitiateDonation={handleInitiateDonation} />
           </motion.div>
         )}
@@ -239,7 +238,7 @@ export default function App() {
 
       </main>
 
-      {/* 11. BOTTOM THIRD EVENTS TICKER STRIPE (CONTINUOUSLY PASSING BY LIKE LINEARFESTIVALS.COM) */}
+      {/* 11. BOTTOM THIRD EVENTS TICKER STRIPE */}
       {currentView === 'main' && (
         <BottomThirdEventsTicker onSelectEvent={handleBookEventTicket} />
       )}

@@ -65,7 +65,6 @@ export const AdminDashboard: React.FC = () => {
     const created: EventItem = {
       id: `evt-ksh-${Date.now()}`,
       title: newEventTitle || 'New Gathering',
-      bengaliTitle: newEventBengali || 'ক্ষেত্র সম্মেলন',
       date: newEventDate,
       isoDate: '2026-11-14',
       time: newEventTime,
@@ -112,7 +111,7 @@ export const AdminDashboard: React.FC = () => {
               </h2>
             </div>
             <p className="text-xs text-[#5E5752] font-mono">
-              Kshestra Foundation (ক্ষেত্র) · Non-Profit Stewardship & Fiscal Ledger
+              Kshestra Foundation · Non-Profit Stewardship & Fiscal Ledger
             </p>
           </div>
         </div>
@@ -163,7 +162,7 @@ export const AdminDashboard: React.FC = () => {
             {events.length} Gatherings
           </div>
           <p className="text-[11px] text-[#5E5752] font-mono">
-            Kolkata & Mumbai Physical Sanctums
+            Kolkata Physical Sanctum
           </p>
         </div>
       </div>

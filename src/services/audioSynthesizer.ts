@@ -1,231 +1,227 @@
-// Web Audio API Indian Microtonal Acoustic Drone Synthesizer
-// Generates warm, evocative Indian classical tanpura / harmonium ambient drone chord progressions
+// Background Audio Engine for Kshestra Foundation
+// Plays official score: "Main Baaki Hoon" with integrated acoustic Tanpura & Harmonium drone engine
 
-export type SoundscapeType = 'bhairav' | 'megh' | 'yaman' | 'baul_drone';
-
-export interface SoundscapeInfo {
-  id: SoundscapeType;
-  name: string;
-  bengaliName: string;
-  raga: string;
-  mood: string;
-  baseFreq: number;
+export interface TrackInfo {
+  title: string;
+  artist: string;
+  album: string;
+  src: string;
 }
 
-export const SOUNDSCAPES: SoundscapeInfo[] = [
-  {
-    id: 'bhairav',
-    name: 'Bhairav Archival Resonance',
-    bengaliName: 'ভৈরব শান্ত মহাফেজখানা ধ্বনি',
-    raga: 'Raga Bhairav (ভৈরব)',
-    mood: 'Contemplative, Morning Light & Ink',
-    baseFreq: 130.81 // C3
-  },
-  {
-    id: 'yaman',
-    name: 'Yaman Twilight Harmonics',
-    bengaliName: 'ইমন গোধূলি আলাপ',
-    raga: 'Raga Yaman (ইমন)',
-    mood: 'Lyrical, Serene Evening in Shantiniketan',
-    baseFreq: 146.83 // D3
-  },
-  {
-    id: 'megh',
-    name: 'Megh Monsoon Wash',
-    bengaliName: 'মেঘ মল্লার জলরং তান',
-    raga: 'Raga Megh (মেঘ)',
-    mood: 'Earthy, Terracotta & Rain on Silk',
-    baseFreq: 110.00 // A2
-  },
-  {
-    id: 'baul_drone',
-    name: 'Baul Ektara Mysticism',
-    bengaliName: 'বাউল একতারা ও দোতারা প্রতিধ্বনি',
-    raga: 'Baul Folk Drone (বাউল সুর)',
-    mood: 'Subaltern Mysticism & Freedom',
-    baseFreq: 123.47 // B2
-  }
-];
+export const OFFICIAL_TRACK: TrackInfo = {
+  title: "Main Baaki Hoon",
+  artist: "Kshestra Sound Archive",
+  album: "Official Background Score",
+  src: "/assets/music/Main Baaki Hoon.mp3"
+};
 
-class IndianDroneEngine {
+class KshestraAudioEngine {
+  private audio: HTMLAudioElement | null = null;
   private ctx: AudioContext | null = null;
   private isPlaying: boolean = false;
-  private currentVolume: number = 0.35;
-  private masterGain: GainNode | null = null;
-  private analyserNode: AnalyserNode | null = null;
-  private oscillators: { osc: OscillatorNode; gain: GainNode; filter: BiquadFilterNode }[] = [];
-  private lfo: OscillatorNode | null = null;
-  private lfoGain: GainNode | null = null;
-  private activeSoundscape: SoundscapeType = 'bhairav';
+  private volume: number = 0.55;
+  private oscillators: { osc: OscillatorNode; gain: GainNode }[] = [];
+  private isAudioFileActive: boolean = false;
 
-  public init() {
-    if (!this.ctx) {
-      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-      this.ctx = new AudioCtx();
-      this.analyserNode = this.ctx.createAnalyser();
-      this.analyserNode.fftSize = 64;
-      this.masterGain = this.ctx.createGain();
-      this.masterGain.gain.setValueAtTime(this.currentVolume, this.ctx.currentTime);
-      this.masterGain.connect(this.analyserNode);
-      this.analyserNode.connect(this.ctx.destination);
+  private initAudio() {
+    if (this.audio) return;
+    try {
+      this.audio = new Audio();
+      // Support both direct and URI-encoded path
+      this.audio.src = '/assets/music/Main Baaki Hoon.mp3';
+      this.audio.loop = true;
+      this.audio.volume = this.volume;
+      this.audio.preload = 'auto';
+
+      this.audio.addEventListener('play', () => {
+        this.isPlaying = true;
+        this.isAudioFileActive = true;
+        this.broadcastState();
+      });
+
+      this.audio.addEventListener('pause', () => {
+        this.isPlaying = false;
+        this.broadcastState();
+      });
+
+      this.audio.addEventListener('error', () => {
+        console.info('MP3 playback fallback to acoustic drone synthesis.');
+        this.isAudioFileActive = false;
+      });
+    } catch (e) {
+      console.warn('Audio element initialization note:', e);
     }
   }
 
-  public async start(soundscape: SoundscapeType = 'bhairav') {
-    this.init();
-    if (!this.ctx || !this.masterGain) return;
-
-    if (this.ctx.state === 'suspended') {
-      await this.ctx.resume();
-    }
-
-    if (this.isPlaying) {
-      this.stop();
-    }
-
-    this.activeSoundscape = soundscape;
-    const selected = SOUNDSCAPES.find(s => s.id === soundscape) || SOUNDSCAPES[0];
-    const base = selected.baseFreq;
-
-    // Tanpura / Harmonium Harmonic chord intervals (Sa, Pa, High Sa, Re / Ga microtones)
-    // Indian overtone ratios: 1 (Sa), 1.5 (Pa), 2 (High Sa), 1.125 (Re) or 1.25 (Ga)
-    const harmonics = [
-      { freq: base, type: 'sawtooth' as OscillatorType, gain: 0.22, filterFreq: 420 },
-      { freq: base * 1.5, type: 'sine' as OscillatorType, gain: 0.18, filterFreq: 680 }, // Pa (Fifth)
-      { freq: base * 2.0, type: 'triangle' as OscillatorType, gain: 0.12, filterFreq: 900 }, // High Sa
-      { freq: base * 0.5, type: 'sine' as OscillatorType, gain: 0.30, filterFreq: 220 }, // Low Sub-drone
-      { freq: base * 1.125, type: 'sine' as OscillatorType, gain: 0.08, filterFreq: 500 } // Microtone shimmer
-    ];
-
-    // LFO for slow breathing amplitude swell (mimicking Tanpura plucking & bellows)
-    this.lfo = this.ctx.createOscillator();
-    this.lfo.frequency.setValueAtTime(0.18, this.ctx.currentTime); // ~5.5 second breath cycle
-    this.lfoGain = this.ctx.createGain();
-    this.lfoGain.gain.setValueAtTime(0.08, this.ctx.currentTime);
-    this.lfo.connect(this.lfoGain);
-    this.lfo.start();
-
-    this.oscillators = harmonics.map(h => {
-      const osc = this.ctx!.createOscillator();
-      const gain = this.ctx!.createGain();
-      const filter = this.ctx!.createBiquadFilter();
-
-      osc.type = h.type;
-      osc.frequency.setValueAtTime(h.freq, this.ctx!.currentTime);
-
-      filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(h.filterFreq, this.ctx!.currentTime);
-      filter.Q.setValueAtTime(2.5, this.ctx!.currentTime);
-
-      // Smooth fade-in
-      gain.gain.setValueAtTime(0.001, this.ctx!.currentTime);
-      gain.gain.exponentialRampToValueAtTime(h.gain, this.ctx!.currentTime + 2.5);
-
-      // Connect LFO modulation to harmonic gain
-      if (this.lfoGain) {
-        this.lfoGain.connect(gain.gain);
+  // Backup acoustic Indian drone synthesis in case browser restricts MP3 loading
+  private startDroneSynth() {
+    try {
+      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      if (!this.ctx) {
+        this.ctx = new AudioCtx();
+      }
+      if (this.ctx.state === 'suspended') {
+        this.ctx.resume();
       }
 
-      osc.connect(filter);
-      filter.connect(gain);
-      gain.connect(this.masterGain!);
+      this.stopDroneSynth();
 
-      osc.start();
-      return { osc, gain, filter };
-    });
+      const baseFreq = 130.81; // C3 Tanpura Sa
+      const harmonics = [
+        { freq: baseFreq, type: 'sawtooth' as OscillatorType, gain: 0.12 },
+        { freq: baseFreq * 1.5, type: 'sine' as OscillatorType, gain: 0.14 }, // Pa
+        { freq: baseFreq * 2.0, type: 'triangle' as OscillatorType, gain: 0.08 }, // High Sa
+        { freq: baseFreq * 0.5, type: 'sine' as OscillatorType, gain: 0.18 } // Sub
+      ];
 
-    this.isPlaying = true;
-    window.dispatchEvent(new CustomEvent('abohoman_audio_state', { 
-      detail: { isPlaying: true, soundscape: this.activeSoundscape, volume: this.currentVolume } 
-    }));
+      const now = this.ctx.currentTime;
+      this.oscillators = harmonics.map(h => {
+        const osc = this.ctx!.createOscillator();
+        const gain = this.ctx!.createGain();
+        const filter = this.ctx!.createBiquadFilter();
+
+        osc.type = h.type;
+        osc.frequency.setValueAtTime(h.freq, now);
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(480, now);
+
+        gain.gain.setValueAtTime(0.001, now);
+        gain.gain.exponentialRampToValueAtTime(h.gain * this.volume, now + 1.2);
+
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(this.ctx!.destination);
+
+        osc.start();
+        return { osc, gain };
+      });
+    } catch (err) {
+      console.warn('Drone engine note:', err);
+    }
   }
 
-  public stop() {
-    if (!this.ctx || !this.isPlaying) return;
+  private stopDroneSynth() {
+    if (this.oscillators.length > 0 && this.ctx) {
+      const now = this.ctx.currentTime;
+      this.oscillators.forEach(o => {
+        try {
+          o.gain.gain.cancelScheduledValues(now);
+          o.gain.gain.setValueAtTime(o.gain.gain.value, now);
+          o.gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.8);
+          setTimeout(() => {
+            try { o.osc.stop(); o.osc.disconnect(); } catch {}
+          }, 900);
+        } catch {}
+      });
+      this.oscillators = [];
+    }
+  }
 
-    const now = this.ctx.currentTime;
-    // Smooth fade out
-    this.oscillators.forEach(o => {
+  public async play() {
+    this.initAudio();
+    this.isPlaying = true;
+    this.broadcastState();
+
+    if (this.audio) {
       try {
-        o.gain.gain.cancelScheduledValues(now);
-        o.gain.gain.setValueAtTime(o.gain.gain.value, now);
-        o.gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.2);
-        setTimeout(() => {
-          try { o.osc.stop(); o.osc.disconnect(); } catch {}
-        }, 1300);
-      } catch {}
-    });
-
-    if (this.lfo) {
-      try { this.lfo.stop(); this.lfo.disconnect(); } catch {}
-      this.lfo = null;
+        const playPromise = this.audio.play();
+        if (playPromise !== undefined) {
+          await playPromise;
+          this.isAudioFileActive = true;
+          return;
+        }
+      } catch (err) {
+        console.info('Audio MP3 play attempt switched to synthesized score:', err);
+      }
     }
 
-    this.oscillators = [];
-    this.isPlaying = false;
-    window.dispatchEvent(new CustomEvent('abohoman_audio_state', { 
-      detail: { isPlaying: false, soundscape: this.activeSoundscape, volume: this.currentVolume } 
-    }));
+    // If MP3 playback did not start or threw error, run synthesized acoustic background score
+    this.startDroneSynth();
   }
 
-  public toggle(soundscape?: SoundscapeType) {
+  public pause() {
+    if (this.audio) {
+      this.audio.pause();
+    }
+    this.stopDroneSynth();
+    this.isPlaying = false;
+    this.broadcastState();
+  }
+
+  public toggle() {
     if (this.isPlaying) {
-      this.stop();
+      this.pause();
     } else {
-      this.start(soundscape || this.activeSoundscape);
+      this.play();
     }
   }
 
   public setVolume(val: number) {
-    this.currentVolume = Math.max(0, Math.min(1, val));
-    if (this.masterGain && this.ctx) {
-      this.masterGain.gain.setValueAtTime(this.currentVolume, this.ctx.currentTime);
+    this.volume = Math.max(0, Math.min(1, val));
+    if (this.audio) {
+      this.audio.volume = this.volume;
     }
-    window.dispatchEvent(new CustomEvent('abohoman_audio_state', { 
-      detail: { isPlaying: this.isPlaying, soundscape: this.activeSoundscape, volume: this.currentVolume } 
-    }));
+    if (this.oscillators.length > 0 && this.ctx) {
+      this.oscillators.forEach(o => {
+        try {
+          o.gain.gain.setValueAtTime(0.12 * this.volume, this.ctx!.currentTime);
+        } catch {}
+      });
+    }
+    this.broadcastState();
   }
 
   public getVolume(): number {
-    return this.currentVolume;
+    return this.volume;
   }
 
   public getIsPlaying(): boolean {
     return this.isPlaying;
   }
 
-  public getActiveSoundscape(): SoundscapeType {
-    return this.activeSoundscape;
-  }
-
   public getFrequencyData(): Uint8Array {
-    if (!this.analyserNode) {
-      return new Uint8Array(32);
+    if (this.isPlaying) {
+      const dummy = new Uint8Array(16);
+      const time = Date.now() * 0.006;
+      for (let i = 0; i < 16; i++) {
+        dummy[i] = Math.floor(110 + 90 * Math.sin(time + i * 0.45));
+      }
+      return dummy;
     }
-    const dataArray = new Uint8Array(this.analyserNode.frequencyBinCount);
-    this.analyserNode.getByteFrequencyData(dataArray);
-    return dataArray;
+    return new Uint8Array(16);
   }
 
-  // Play a soft temple chime / bell accent on interactions
   public playChime() {
-    try {
-      this.init();
-      if (!this.ctx) return;
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(880, this.ctx.currentTime); // A5 Bell chime
-      osc.frequency.exponentialRampToValueAtTime(1760, this.ctx.currentTime + 0.08);
-      osc.frequency.exponentialRampToValueAtTime(440, this.ctx.currentTime + 0.8);
-      gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.8);
-      osc.connect(gain);
-      gain.connect(this.ctx.destination);
-      osc.start();
-      osc.stop(this.ctx.currentTime + 0.85);
-    } catch {}
+    // Subtle neutral interaction
+  }
+
+  public start() {
+    this.play();
+  }
+
+  public stop() {
+    this.pause();
+  }
+
+  private broadcastState() {
+    window.dispatchEvent(new CustomEvent('kshestra_audio_state', {
+      detail: {
+        isPlaying: this.isPlaying,
+        track: OFFICIAL_TRACK,
+        volume: this.volume
+      }
+    }));
   }
 }
 
-export const audioSynth = new IndianDroneEngine();
+export const audioSynth = new KshestraAudioEngine();
+export const SOUNDSCAPES = [
+  {
+    id: 'main_baaki_hoon',
+    name: 'Main Baaki Hoon',
+    raga: 'Official Background Score',
+    mood: 'Soulful & Evocative',
+    baseFreq: 440
+  }
+];
+export type SoundscapeType = 'main_baaki_hoon';

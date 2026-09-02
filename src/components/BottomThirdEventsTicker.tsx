@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StorageService } from '../services/storage';
 import { EventItem } from '../types';
 import { audioSynth } from '../services/audioSynthesizer';
-import { Calendar, MapPin, Ticket, Sparkles, ChevronUp, ChevronDown, ArrowUpRight } from 'lucide-react';
+import { MapPin, ChevronUp, ChevronDown, ArrowUpRight } from 'lucide-react';
 import { KshestraLogo } from './KshestraLogo';
 
 interface BottomThirdEventsTickerProps {
@@ -27,7 +27,7 @@ export const BottomThirdEventsTicker: React.FC<BottomThirdEventsTickerProps> = (
         isMinimized ? 'bottom-0' : 'bottom-0 md:bottom-2'
       } px-0 md:px-4 max-w-7xl mx-auto pointer-events-none`}
     >
-      <div className="pointer-events-auto bg-[#FFFFFF]/95 backdrop-blur-md text-[#211E1C] border-t md:border border-[#211E1C]/20 shadow-xl md:rounded-sm overflow-hidden flex flex-col">
+      <div className="pointer-events-auto bg-[#FFFFFF]/95 backdrop-blur-md text-[#211E1C] border-t md:border border-[#211E1C]/20 shadow-xl md:rounded-xs overflow-hidden flex flex-col">
         
         {/* Top Minimal Strip: Live Status & Controls */}
         <div className="flex items-center justify-between px-3 sm:px-5 py-1.5 bg-[#F3EDE2] border-b border-[#211E1C]/10 text-[10px] sm:text-xs font-mono">
@@ -38,7 +38,7 @@ export const BottomThirdEventsTicker: React.FC<BottomThirdEventsTickerProps> = (
             </span>
             <span className="text-[#8E3524] font-bold uppercase tracking-wider flex items-center gap-1">
               <span>LIVE SANCTUARY PROGRAMME</span>
-              <span className="hidden sm:inline">· 2026 CONFLUENCES</span>
+              <span className="hidden sm:inline">· KOLKATA 2026</span>
             </span>
           </div>
 
@@ -48,7 +48,7 @@ export const BottomThirdEventsTicker: React.FC<BottomThirdEventsTickerProps> = (
             </span>
             <button
               onClick={() => setIsMinimized(!isMinimized)}
-              className="text-[#5E5752] hover:text-[#8E3524] p-0.5 rounded transition-colors flex items-center gap-1 text-[10px]"
+              className="text-[#5E5752] hover:text-[#8E3524] p-0.5 rounded-xs transition-colors flex items-center gap-1 text-[10px]"
               title={isMinimized ? 'Expand Events Strip' : 'Minimize Events Strip'}
             >
               <span>{isMinimized ? 'EXPAND' : 'COLLAPSE'}</span>
@@ -69,36 +69,33 @@ export const BottomThirdEventsTicker: React.FC<BottomThirdEventsTickerProps> = (
                 <div
                   key={`${evt.id}-${idx}`}
                   onClick={() => handleEventClick(evt)}
-                  className="group flex items-center gap-3 sm:gap-4 cursor-pointer px-3 py-1.5 rounded-sm hover:bg-[#F3EDE2] transition-all border border-transparent hover:border-[#8E3524]/30 shrink-0"
+                  className="group flex items-center gap-3 sm:gap-4 cursor-pointer px-3 py-1.5 rounded-xs hover:bg-[#F3EDE2] transition-all border border-transparent hover:border-[#8E3524]/30 shrink-0"
                 >
-                  <div className="w-5 h-5 rounded-full bg-[#8E3524] text-[#FAF7F2] flex items-center justify-center font-serif text-[10px] font-bold">
-                    <KshestraLogo variant="white" className="w-3 h-3" />
+                  <div className="w-5 h-5 rounded-xs bg-[#FAF7F2] border border-[#211E1C]/20 flex items-center justify-center p-0.5">
+                    <KshestraLogo preferAssetImage className="w-full h-full object-contain" />
                   </div>
 
                   <div className="flex items-center gap-2 font-mono text-xs">
                     <span className="text-[#8E3524] font-bold tracking-wider uppercase">
                       [{evt.date.split('·')[0].trim()}]
                     </span>
-                    <span className="font-serif-display text-sm sm:text-base font-bold text-[#211E1C] group-hover:text-[#8E3524] transition-colors">
+                    <span className="font-gambetta text-sm sm:text-base font-bold text-[#211E1C] group-hover:text-[#8E3524] transition-colors">
                       {evt.title}
-                    </span>
-                    <span className="text-[#5E5752] hidden md:inline text-[11px]">
-                      ({evt.bengaliTitle})
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#5E5752] bg-[#211E1C]/5 px-2 py-0.5 rounded">
+                  <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#5E5752] bg-[#211E1C]/5 px-2 py-0.5 rounded-xs">
                     <MapPin className="w-3 h-3 text-[#8E3524]" />
                     <span>{evt.city}</span>
                   </div>
 
-                  <div className="flex items-center gap-1 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 bg-[#8E3524] text-[#FAF7F2] group-hover:bg-[#662215] rounded transition-all">
+                  <div className="flex items-center gap-1 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 bg-[#8E3524] text-[#FAF7F2] group-hover:bg-[#662215] rounded-xs transition-all">
                     <span>{evt.price === 0 ? 'FREE PASS' : `PASS ₹${evt.price}`}</span>
                     <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </div>
 
                   {/* Glyph Divider between items */}
-                  <span className="text-[#C98E3A] text-xs font-serif pl-4">✦</span>
+                  <span className="text-[#C0822B] text-xs font-serif pl-4">✦</span>
                 </div>
               ))}
             </div>

@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Volume2, VolumeX, Play, Pause, Music, ChevronDown, ChevronUp, Radio } from 'lucide-react';
-import { audioSynth, SOUNDSCAPES, SoundscapeType } from '../services/audioSynthesizer';
+import { Volume2, VolumeX, Play, Pause, Music, ChevronDown, ChevronUp, Disc3 } from 'lucide-react';
+import { audioSynth, OFFICIAL_TRACK } from '../services/audioSynthesizer';
 
 export const AudioDock: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [activeSoundscape, setActiveSoundscape] = useState<SoundscapeType>('bhairav');
-  const [volume, setVolume] = useState(0.35);
+  const [volume, setVolume] = useState(0.45);
   const [isExpanded, setIsExpanded] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -13,16 +12,15 @@ export const AudioDock: React.FC = () => {
     const handleAudioState = (e: any) => {
       if (e.detail) {
         setIsPlaying(e.detail.isPlaying);
-        setActiveSoundscape(e.detail.soundscape);
-        setVolume(e.detail.volume);
+        if (typeof e.detail.volume === 'number') {
+          setVolume(e.detail.volume);
+        }
       }
     };
 
     window.addEventListener('kshestra_audio_state', handleAudioState);
-    window.addEventListener('abohoman_audio_state', handleAudioState);
     return () => {
       window.removeEventListener('kshestra_audio_state', handleAudioState);
-      window.removeEventListener('abohoman_audio_state', handleAudioState);
     };
   }, []);
 
@@ -39,11 +37,11 @@ export const AudioDock: React.FC = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       if (!isPlaying) {
-        // Draw resting flat line with faint pulse
+        // Resting line
         ctx.beginPath();
         ctx.strokeStyle = '#8E3524';
         ctx.lineWidth = 1;
-        ctx.globalAlpha = 0.25;
+        ctx.globalAlpha = 0.3;
         ctx.moveTo(0, canvas.height / 2);
         ctx.lineTo(canvas.width, canvas.height / 2);
         ctx.stroke();
@@ -51,17 +49,17 @@ export const AudioDock: React.FC = () => {
       }
 
       const freqData = audioSynth.getFrequencyData();
-      const barCount = 16;
+      const barCount = 14;
       const barWidth = canvas.width / barCount;
 
       for (let i = 0; i < barCount; i++) {
         const val = freqData[i % freqData.length] || 0;
-        const normalized = Math.max(3, (val / 255) * canvas.height * 0.9);
+        const normalized = Math.max(3, (val / 255) * canvas.height * 0.88);
         const x = i * barWidth;
         const y = (canvas.height - normalized) / 2;
 
-        ctx.fillStyle = i % 2 === 0 ? '#8E3524' : '#4A583A';
-        ctx.globalAlpha = 0.85;
+        ctx.fillStyle = i % 2 === 0 ? '#8E3524' : '#C0822B';
+        ctx.globalAlpha = 0.9;
         ctx.fillRect(x + 1, y, barWidth - 2, normalized);
       }
     };
@@ -70,15 +68,8 @@ export const AudioDock: React.FC = () => {
     return () => cancelAnimationFrame(animId);
   }, [isPlaying]);
 
-  const currentInfo = SOUNDSCAPES.find(s => s.id === activeSoundscape) || SOUNDSCAPES[0];
-
   const togglePlayback = () => {
     audioSynth.toggle();
-  };
-
-  const changeSoundscape = (id: SoundscapeType) => {
-    audioSynth.start(id);
-    audioSynth.playChime();
   };
 
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,7 +80,7 @@ export const AudioDock: React.FC = () => {
 
   return (
     <div className="fixed bottom-4 left-4 z-40 max-w-sm w-[calc(100vw-32px)] sm:w-80 select-none">
-      <div className="bg-[#FAF7F2]/95 backdrop-blur-md border border-[#211E1C]/20 rounded-sm shadow-lg p-3 transition-all duration-300 text-[#211E1C]">
+      <div className="bg-[#FAF7F2]/95 backdrop-blur-md border border-[#211E1C]/20 rounded-xs shadow-lg p-3 transition-all duration-300 text-[#211E1C]">
         
         {/* Top bar with audio visualizer & quick toggle */}
         <div className="flex items-center justify-between gap-2">
@@ -98,19 +89,19 @@ export const AudioDock: React.FC = () => {
               id="audio-play-pause-btn"
               onClick={togglePlayback}
               data-cursor="pointer"
-              title={isPlaying ? "Pause Sanctuary Acoustic Drone" : "Play Sanctuary Acoustic Drone"}
-              className="w-8 h-8 rounded-sm shrink-0 flex items-center justify-center bg-[#8E3524] text-[#FAF7F2] hover:bg-[#662215] transition-colors shadow-xs"
+              title={isPlaying ? "Pause Background Music" : "Play Background Music: Main Baaki Hoon"}
+              className="w-8 h-8 rounded-xs shrink-0 flex items-center justify-center bg-[#8E3524] text-[#FAF7F2] hover:bg-[#662215] transition-colors shadow-xs"
             >
               {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 translate-x-0.5" />}
             </button>
 
             <div className="overflow-hidden">
               <div className="flex items-center gap-1.5 text-xs font-semibold tracking-wide text-[#211E1C] truncate">
-                <span>{currentInfo.name}</span>
-                <span className="text-[10px] font-bengali text-[#8E3524]">{currentInfo.bengaliName}</span>
+                <Disc3 className={`w-3.5 h-3.5 text-[#8E3524] shrink-0 ${isPlaying ? 'animate-spin' : ''}`} />
+                <span className="truncate">{OFFICIAL_TRACK.title}</span>
               </div>
               <p className="text-[10px] text-[#5E5752] truncate font-mono">
-                {isPlaying ? 'Acoustic Sanctuary Resonance' : 'Drone Inactive · Tap to Play'}
+                {isPlaying ? 'Kshestra Sanctuary Background Score' : 'Background Music · Tap to Play'}
               </p>
             </div>
           </div>
@@ -119,9 +110,9 @@ export const AudioDock: React.FC = () => {
             {/* Real-time Oscilloscope Canvas */}
             <canvas
               ref={canvasRef}
-              width={64}
-              height={24}
-              className="rounded-sm bg-[#F3EDE2] border border-[#211E1C]/10"
+              width={56}
+              height={22}
+              className="rounded-xs bg-[#F3EDE2] border border-[#211E1C]/10"
             />
 
             {/* Expand options */}
@@ -129,43 +120,26 @@ export const AudioDock: React.FC = () => {
               id="audio-expand-toggle-btn"
               onClick={() => setIsExpanded(!isExpanded)}
               data-cursor="pointer"
-              aria-label="Toggle soundscape settings"
-              className="p-1 hover:bg-[#F3EDE2] rounded-sm text-[#5E5752] hover:text-[#211E1C] transition-colors"
+              aria-label="Toggle audio settings"
+              className="p-1 hover:bg-[#F3EDE2] rounded-xs text-[#5E5752] hover:text-[#211E1C] transition-colors"
             >
               {isExpanded ? <ChevronDown className="w-4 h-4" /> : <ChevronUp className="w-4 h-4" />}
             </button>
           </div>
         </div>
 
-        {/* Expandable Soundscape Selector & Volume Slider */}
+        {/* Expandable Volume Slider & Track Details */}
         {isExpanded && (
           <div className="mt-3 pt-3 border-t border-[#211E1C]/10 space-y-3">
             
-            {/* Soundscape presets */}
-            <div className="space-y-1">
-              <label className="text-[10px] font-mono uppercase tracking-wider text-[#5E5752] block">
-                Sanctum Acoustic Modes
-              </label>
-              <div className="grid grid-cols-2 gap-1.5">
-                {SOUNDSCAPES.map((sc) => {
-                  const isActive = activeSoundscape === sc.id;
-                  return (
-                    <button
-                      key={sc.id}
-                      onClick={() => changeSoundscape(sc.id)}
-                      data-cursor="pointer"
-                      className={`text-left p-1.5 rounded-sm border text-xs transition-all ${
-                        isActive
-                          ? 'bg-[#8E3524] text-[#FAF7F2] border-[#8E3524]'
-                          : 'bg-[#FAF7F2] text-[#211E1C] border-[#211E1C]/15 hover:border-[#8E3524]/50'
-                      }`}
-                    >
-                      <div className="font-medium truncate">{sc.name}</div>
-                      <div className="text-[9px] opacity-80 truncate font-mono">{sc.mood}</div>
-                    </button>
-                  );
-                })}
+            <div className="text-[10px] font-mono text-[#5E5752] bg-[#F3EDE2] p-2 rounded-xs border border-[#211E1C]/10 flex items-center justify-between">
+              <div>
+                <div className="font-bold text-[#211E1C]">{OFFICIAL_TRACK.title}</div>
+                <div className="text-[#8E3524]">{OFFICIAL_TRACK.artist}</div>
               </div>
+              <span className="px-1.5 py-0.5 bg-[#8E3524]/10 text-[#8E3524] text-[9px] font-bold rounded-xs">
+                MP3 STEREO
+              </span>
             </div>
 
             {/* Volume Control */}
@@ -173,7 +147,7 @@ export const AudioDock: React.FC = () => {
               <div className="flex items-center justify-between text-[10px] font-mono text-[#5E5752]">
                 <span className="flex items-center gap-1">
                   {volume === 0 ? <VolumeX className="w-3 h-3" /> : <Volume2 className="w-3 h-3 text-[#8E3524]" />}
-                  Master Resonance Volume
+                  Master Music Volume
                 </span>
                 <span>{Math.round(volume * 100)}%</span>
               </div>
@@ -195,3 +169,4 @@ export const AudioDock: React.FC = () => {
     </div>
   );
 };
+

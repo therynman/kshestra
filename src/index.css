@@ -1,5 +1,86 @@
 @import "tailwindcss";
 
+/* Local Gambetta Font Family Definition */
+@font-face {
+  font-family: 'Gambetta';
+  src: url('/assets/fonts/Gambetta-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gambetta';
+  src: url('/assets/fonts/Gambetta-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gambetta';
+  src: url('/assets/fonts/Gambetta-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gambetta';
+  src: url('/assets/fonts/Gambetta-MediumItalic.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gambetta';
+  src: url('/assets/fonts/Gambetta-Semibold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gambetta';
+  src: url('/assets/fonts/Gambetta-SemiboldItalic.otf') format('opentype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gambetta';
+  src: url('/assets/fonts/Gambetta-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gambetta';
+  src: url('/assets/fonts/Gambetta-BoldItalic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gambetta';
+  src: url('/assets/fonts/Gambetta-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gambetta';
+  src: url('/assets/fonts/Gambetta-LightItalic.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
 @layer base {
   :root {
     --color-charcoal: #211E1C;
@@ -29,13 +110,17 @@
     min-height: 100vh;
   }
 
-  h1, h2, h3, .font-serif-display {
+  h1, h2, h3, h4, .font-serif-display {
     font-family: 'Gambetta', 'Cormorant Garamond', Georgia, serif;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.02em;
+  }
+
+  .font-gambetta {
+    font-family: 'Gambetta', 'Cormorant Garamond', Georgia, serif;
   }
 
   .font-bengali {
-    font-family: 'Noto Serif Bengali', Georgia, serif;
+    font-family: 'Noto Serif Bengali', 'Gambetta', Georgia, serif;
   }
 
   .font-sans-ui {
@@ -47,40 +132,26 @@
   }
 }
 
-/* Authentic Sanctuary Craft Classes */
-.sanctuary-card {
-  background-color: #FFFFFF;
-  border: 1px solid rgba(33, 30, 28, 0.12);
-  transition: all 0.25s ease;
-}
-
-.sanctuary-card:hover {
-  border-color: rgba(33, 30, 28, 0.28);
-}
-
+/* Editorial Drop Cap */
 .drop-cap:first-letter {
   float: left;
   font-family: 'Gambetta', Georgia, serif;
-  font-size: 3.6rem;
+  font-size: 3.8rem;
   line-height: 0.85;
   padding-top: 4px;
-  padding-right: 12px;
+  padding-right: 14px;
   padding-bottom: 2px;
   color: #8E3524;
   font-weight: 700;
 }
 
-/* Custom Cursor */
-.custom-cursor-follower {
-  pointer-events: none;
-  position: fixed;
-  z-index: 9999;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: width 0.25s ease, height 0.25s ease, background-color 0.25s ease, border 0.25s ease, opacity 0.25s ease;
+/* Editorial subtle borders and rules */
+.editorial-rule {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(33, 30, 28, 0.25) 0%, rgba(33, 30, 28, 0.05) 100%);
 }
 
-/* Refined Scrollbar */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 7px;
   height: 7px;
@@ -105,9 +176,10 @@
 .animate-ticker {
   display: flex;
   width: max-content;
-  animation: ticker 40s linear infinite;
+  animation: ticker 45s linear infinite;
 }
 
 .animate-ticker:hover {
   animation-play-state: paused;
 }
+

@@ -14,57 +14,6 @@ const STORAGE_KEYS = {
   NEWSLETTER_SUBSCRIBERS: 'kshestra_newsletter_subscribers_v2'
 };
 
-// Seed default initial user
-const DEFAULT_USER: UserMember = {
-  id: 'usr-member-01',
-  name: 'Rayan Das',
-  email: 'dasrayan24@gmail.com',
-  phone: '+91 98301 22489',
-  role: 'member',
-  isVerified: true,
-  memberSince: 'October 2026',
-  city: 'Kolkata, WB',
-  bio: 'Independent filmmaker and visual storyteller at Kshestra Kolkata Sanctum.',
-  bookmarkedArtworkIds: ['gal-01', 'gal-02'],
-  ticketPurchases: [
-    {
-      id: 'tkt-seed-01',
-      eventId: 'evt-kshestra-01',
-      eventTitle: 'Words Unspoken: An Open-Air Acoustic Confluence',
-      eventDate: 'Saturday, October 10 · 6:30 PM IST',
-      eventTime: '6:30 PM IST',
-      eventVenue: 'The Courtyard Amphitheatre · South Kolkata',
-      buyerName: 'Rayan Das',
-      buyerEmail: 'dasrayan24@gmail.com',
-      buyerPhone: '+91 98301 22489',
-      ticketCount: 1,
-      totalAmount: 199,
-      purchaseDate: '2026-09-01',
-      ticketCode: 'KSH-ACOUSTIC-9284',
-      qrData: 'KSHESTRA-TKT:KSH-ACOUSTIC-9284|USER:dasrayan24@gmail.com|EVT:evt-kshestra-01',
-      paymentId: 'pay_RPZ928471928',
-      status: 'confirmed'
-    }
-  ],
-  donations: [
-    {
-      id: 'don-seed-01',
-      donorName: 'Rayan Das',
-      donorEmail: 'dasrayan24@gmail.com',
-      amount: 2500,
-      currency: 'INR',
-      tierId: 'tier-studio',
-      tierName: 'Sanctum Studio Patron (স্টুডিও পৃষ্ঠপোষক)',
-      date: '2026-09-01',
-      is80GRequested: true,
-      panNumber: 'ABCDE1234F',
-      paymentId: 'pay_RPZ817391823',
-      status: 'completed'
-    }
-  ],
-  calendarSyncEnabled: true
-};
-
 const DEFAULT_ADMIN: UserMember = {
   id: 'usr-admin-01',
   name: 'Tamohan (Trustee Admin)',
@@ -73,7 +22,7 @@ const DEFAULT_ADMIN: UserMember = {
   role: 'admin',
   isVerified: true,
   memberSince: 'January 2026',
-  city: 'Kolkata / Mumbai',
+  city: 'Kolkata, WB',
   bio: 'Founder & Trustee Guardian with administrative stewardship over sanctums, dispatches, and funds.',
   bookmarkedArtworkIds: ['gal-01', 'gal-02', 'gal-03', 'gal-04'],
   ticketPurchases: [],
@@ -177,13 +126,13 @@ export const StorageService = {
     }
   },
 
-  // Users & Auth
+  // Users & Auth (No default logged in user - clean guest state)
   getCurrentUser: (): UserMember | null => {
     try {
       const data = localStorage.getItem(STORAGE_KEYS.CURRENT_USER);
-      return data ? JSON.parse(data) : DEFAULT_USER;
+      return data ? JSON.parse(data) : null;
     } catch {
-      return DEFAULT_USER;
+      return null;
     }
   },
 
@@ -219,6 +168,7 @@ export const StorageService = {
       role: email.includes('admin') ? 'admin' : 'member',
       isVerified: true,
       memberSince: '2026',
+      city: 'Kolkata, WB',
       bookmarkedArtworkIds: [],
       ticketPurchases: [],
       donations: [],
@@ -234,9 +184,9 @@ export const StorageService = {
   getAllUsers: (): UserMember[] => {
     try {
       const data = localStorage.getItem(STORAGE_KEYS.ALL_USERS);
-      return data ? JSON.parse(data) : [DEFAULT_USER, DEFAULT_ADMIN];
+      return data ? JSON.parse(data) : [DEFAULT_ADMIN];
     } catch {
-      return [DEFAULT_USER, DEFAULT_ADMIN];
+      return [DEFAULT_ADMIN];
     }
   },
 
@@ -248,7 +198,7 @@ export const StorageService = {
   getTickets: (): TicketPurchase[] => {
     try {
       const data = localStorage.getItem(STORAGE_KEYS.TICKETS);
-      return data ? JSON.parse(data) : (DEFAULT_USER.ticketPurchases || []);
+      return data ? JSON.parse(data) : [];
     } catch {
       return [];
     }
@@ -286,7 +236,7 @@ export const StorageService = {
   getDonations: (): DonationRecord[] => {
     try {
       const data = localStorage.getItem(STORAGE_KEYS.DONATIONS);
-      return data ? JSON.parse(data) : (DEFAULT_USER.donations || []);
+      return data ? JSON.parse(data) : [];
     } catch {
       return [];
     }
@@ -364,9 +314,6 @@ export const StorageService = {
     }
     if (!localStorage.getItem(STORAGE_KEYS.DISPATCHES)) {
       localStorage.setItem(STORAGE_KEYS.DISPATCHES, JSON.stringify(INITIAL_DISPATCHES));
-    }
-    if (!localStorage.getItem(STORAGE_KEYS.CURRENT_USER)) {
-      localStorage.setItem(STORAGE_KEYS.CURRENT_USER, JSON.stringify(DEFAULT_USER));
     }
   }
 };

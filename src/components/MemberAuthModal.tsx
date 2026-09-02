@@ -89,7 +89,7 @@ export const MemberAuthModal: React.FC<MemberAuthModalProps> = ({ onClose, onSuc
   };
 
   const handleQuickDemoMember = () => {
-    const member = StorageService.loginAsMember('dasrayan24@gmail.com', 'Rayan Das');
+    const member = StorageService.loginAsMember('resident@kshestra.com', 'Resident Creator');
     onSuccess(member);
   };
 
@@ -131,7 +131,7 @@ export const MemberAuthModal: React.FC<MemberAuthModalProps> = ({ onClose, onSuc
           {/* Quick Demo Access Bar */}
           <div className="bg-[#F3EDE2] p-3 rounded-sm border border-[#211E1C]/10 space-y-2">
             <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-[#5E5752]">
-              <span>Fast Verification Switcher:</span>
+              <span>Quick Preview Logins:</span>
               <span className="text-[#8E3524] font-bold">Demo Ready</span>
             </div>
             <div className="grid grid-cols-2 gap-2">
@@ -141,7 +141,7 @@ export const MemberAuthModal: React.FC<MemberAuthModalProps> = ({ onClose, onSuc
                 data-cursor="pointer"
                 className="px-2.5 py-1.5 text-xs font-semibold rounded-sm bg-[#FAF7F2] hover:bg-[#FFFFFF] text-[#211E1C] border border-[#211E1C]/15 transition-colors text-left truncate"
               >
-                👤 Sign In: Rayan Das
+                👤 Resident Creator
               </button>
               <button
                 type="button"
@@ -149,7 +149,7 @@ export const MemberAuthModal: React.FC<MemberAuthModalProps> = ({ onClose, onSuc
                 data-cursor="pointer"
                 className="px-2.5 py-1.5 text-xs font-semibold rounded-sm bg-[#FAF7F2] hover:bg-[#FFFFFF] text-[#8E3524] border border-[#211E1C]/15 transition-colors text-left truncate"
               >
-                🛡️ Sign In: Trustee Desk
+                🛡️ Trustee Desk
               </button>
             </div>
           </div>

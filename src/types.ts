@@ -13,7 +13,7 @@ export type EventCategory =
 export interface EventItem {
   id: string;
   title: string;
-  bengaliTitle: string;
+  bengaliTitle?: string;
   date: string;
   isoDate: string; // YYYY-MM-DD
   time: string;
@@ -54,7 +54,7 @@ export interface TeamMember {
 export interface Artwork {
   id: string;
   title: string;
-  bengaliTitle: string;
+  bengaliTitle?: string;
   artist: string;
   bengaliArtist?: string;
   year?: string;
@@ -87,7 +87,7 @@ export interface GazetteArticle {
 export interface DonationTier {
   id: string;
   name: string;
-  bengaliName: string;
+  bengaliName?: string;
   amount: number;
   description: string;
   benefits: string[];

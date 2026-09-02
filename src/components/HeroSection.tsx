@@ -69,21 +69,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             
             {/* H1 Headline */}
             <div className="space-y-4">
-              <h1 className="font-gambetta text-4xl sm:text-6xl md:text-7xl lg:text-[4.75rem] font-bold tracking-tight text-[#211E1C] leading-[1.12] sm:leading-[1.15]">
-                <span>We are many. </span>
-                <br className="hidden sm:inline" />
-                <span>We are One. </span>
-                <br className="hidden md:inline" />
-                <span className="inline-flex items-baseline flex-wrap gap-x-2 sm:gap-x-3 pt-1">
+              <h1 className="font-gambetta text-4xl sm:text-6xl md:text-7xl lg:text-[4.75rem] font-bold tracking-tight text-[#211E1C] leading-[1.14]">
+                <span>We are many. We are One.</span>
+                <br className="hidden sm:block" />
+                <span className="inline-flex items-baseline flex-wrap gap-x-3 mt-1 sm:mt-2">
                   <span>We are</span>
-                  <span className="relative inline-block text-[#8E3524] min-w-[4ch] pb-0.5 border-b-2 sm:border-b-4 border-[#8E3524]">
+                  <span className="inline-block text-[#8E3524]">
                     <AnimatePresence mode="wait">
                       <motion.span
                         key={heroScripts[activeScriptIdx]}
-                        initial={{ opacity: 0, y: 12 }}
+                        initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -12 }}
-                        transition={{ duration: 0.3, ease: 'easeOut' }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.35, ease: 'easeOut' }}
                         className="inline-block whitespace-nowrap"
                       >
                         {heroScripts[activeScriptIdx]}
@@ -92,26 +90,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   </span>
                 </span>
               </h1>
-
-              {/* Multilingual Script Indicator Badges */}
-              <div className="pt-2 flex flex-wrap items-center gap-2 text-xs font-mono text-[#5E5752]">
-                <span className="text-[10px] uppercase tracking-widest text-[#8E3524] font-bold mr-1">
-                  SCRIPTS:
-                </span>
-                {heroScripts.map((script, idx) => (
-                  <button
-                    key={script}
-                    onClick={() => setActiveScriptIdx(idx)}
-                    className={`px-2 py-0.5 text-xs rounded-xs border transition-all ${
-                      activeScriptIdx === idx
-                        ? 'bg-[#8E3524] text-[#FAF7F2] border-[#8E3524] font-bold'
-                        : 'bg-[#FFFFFF] text-[#5E5752] border-[#211E1C]/15 hover:border-[#8E3524]/50'
-                    }`}
-                  >
-                    {script}
-                  </button>
-                ))}
-              </div>
             </div>
 
             {/* Exact Subheadline */}

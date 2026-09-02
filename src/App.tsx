@@ -6,7 +6,6 @@
 import React, { useState, useEffect } from 'react';
 import { CustomCursor } from './components/CustomCursor';
 import { ThreeArtCanvas } from './components/ThreeArtCanvas';
-import { AudioDock } from './components/AudioDock';
 import { Header } from './components/Header';
 import { BottomThirdEventsTicker } from './components/BottomThirdEventsTicker';
 import { HeroSection } from './components/HeroSection';
@@ -144,9 +143,6 @@ export default function App() {
 
       {/* Organic Terracotta, Moss & Charcoal Ambient Particle Canvas */}
       <ThreeArtCanvas />
-
-      {/* Persistent Meditative Sanctum Drone Audio Dock */}
-      <AudioDock />
 
       {/* 1. Header & Top Navigation with Smart Hide on Scroll Down */}
       <Header
